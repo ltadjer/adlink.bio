@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      MYSQL_DATABASE: 'sf_adlink'
+    ports: 
+      - '3306:3306'
+    volumes: 
+      - ./sf_adlink.sql:/docker-entrypoint-initdb.d/sf_adlink.sql
