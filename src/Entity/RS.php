@@ -33,9 +33,10 @@ class RS
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="rS")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="RSs")
      */
     private $user;
+
 
     public function getId(): ?int
     {
@@ -89,4 +90,5 @@ class RS
 
         return $this;
     }
+
 }

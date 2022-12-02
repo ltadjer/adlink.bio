@@ -33,9 +33,10 @@ class SectionVideo
     private $altVideo;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionVideo", cascade={"persist", "remove"})
      */
     private $user;
+
 
 
     public function getId(): ?int
@@ -86,9 +87,20 @@ class SectionVideo
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setSectionVideo(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getSectionVideo() !== $this) {
+            $user->setSectionVideo($this);
+        }
+
         $this->user = $user;
 
         return $this;
     }
+
 
 }

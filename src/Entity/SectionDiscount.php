@@ -53,7 +53,7 @@ class SectionDiscount
     private $textCardColor;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionDiscount", cascade={"persist", "remove"})
      */
     private $user;
 
@@ -154,8 +154,20 @@ class SectionDiscount
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setSectionDiscount(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getSectionDiscount() !== $this) {
+            $user->setSectionDiscount($this);
+        }
+
         $this->user = $user;
 
         return $this;
     }
+
+
 }

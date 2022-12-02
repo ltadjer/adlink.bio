@@ -33,7 +33,7 @@ class SectionRS
     private $textBtnColor;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionRS", cascade={"persist", "remove"})
      */
     private $user;
 
@@ -86,9 +86,20 @@ class SectionRS
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setSectionRS(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getSectionRS() !== $this) {
+            $user->setSectionRS($this);
+        }
+
         $this->user = $user;
 
         return $this;
     }
+
 
 }

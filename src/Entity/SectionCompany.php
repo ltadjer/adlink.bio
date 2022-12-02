@@ -48,7 +48,7 @@ class SectionCompany
     private $baselineColor;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionCompany", cascade={"persist", "remove"})
      */
     private $user;
 
@@ -137,6 +137,16 @@ class SectionCompany
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setSectionCompany(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getSectionCompany() !== $this) {
+            $user->setSectionCompany($this);
+        }
+
         $this->user = $user;
 
         return $this;

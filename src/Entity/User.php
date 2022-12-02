@@ -35,38 +35,41 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=SectionCOmpany::class, cascade={"persist", "remove"})
-     */
-    private $sectionCompany;
-
-    /**
-     * @ORM\OneToOne(targetEntity=SectionDiscount::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=SectionDiscount::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $sectionDiscount;
 
     /**
-     * @ORM\OneToOne(targetEntity=SectionDiscount::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=SectionLink::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $sectionLink;
 
     /**
-     * @ORM\OneToOne(targetEntity=SectionRS::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=SectionRS::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $sectionRS;
 
     /**
-     * @ORM\OneToOne(targetEntity=SectionVideo::class, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=RS::class, mappedBy="user")
+     */
+    private $RSs;
+
+    /**
+     * @ORM\OneToOne(targetEntity=SectionVideo::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $sectionVideo;
 
     /**
-     * @ORM\OneToMany(targetEntity=RS::class, mappedBy="user")
+     * @ORM\OneToOne(targetEntity=SectionCompany::class, inversedBy="user", cascade={"persist", "remove"})
      */
-    private $rS;
+    private $sectionCompany;
+
+    
 
     public function __construct()
     {
         $this->rS = new ArrayCollection();
+        $this->RSs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,17 +113,6 @@ class User
         return $this;
     }
 
-    public function getSectionCompany(): ?SectionCOmpany
-    {
-        return $this->sectionCompany;
-    }
-
-    public function setSectionCompany(?SectionCOmpany $sectionCompany): self
-    {
-        $this->sectionCompany = $sectionCompany;
-
-        return $this;
-    }
 
     public function getSectionDiscount(): ?SectionDiscount
     {
@@ -134,12 +126,12 @@ class User
         return $this;
     }
 
-    public function getSectionLink(): ?SectionDiscount
+    public function getSectionLink(): ?SectionLink
     {
         return $this->sectionLink;
     }
 
-    public function setSectionLink(?SectionDiscount $sectionLink): self
+    public function setSectionLink(?SectionLink $sectionLink): self
     {
         $this->sectionLink = $sectionLink;
 
@@ -158,6 +150,36 @@ class User
         return $this;
     }
 
+    /**
+     * @return Collection<int, RS>
+     */
+    public function getRSs(): Collection
+    {
+        return $this->RSs;
+    }
+
+    public function addRSs(RS $rSs): self
+    {
+        if (!$this->RSs->contains($rSs)) {
+            $this->RSs[] = $rSs;
+            $rSs->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRSs(RS $rSs): self
+    {
+        if ($this->RSs->removeElement($rSs)) {
+            // set the owning side to null (unless already changed)
+            if ($rSs->getUser() === $this) {
+                $rSs->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getSectionVideo(): ?SectionVideo
     {
         return $this->sectionVideo;
@@ -170,35 +192,16 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, RS>
-     */
-    public function getRS(): Collection
+    public function getSectionCompany(): ?SectionCompany
     {
-        return $this->rS;
+        return $this->sectionCompany;
     }
 
-    public function addR(RS $r): self
+    public function setSectionCompany(?SectionCompany $sectionCompany): self
     {
-        if (!$this->rS->contains($r)) {
-            $this->rS[] = $r;
-            $r->setUser($this);
-        }
+        $this->sectionCompany = $sectionCompany;
 
         return $this;
     }
-
-    public function removeR(RS $r): self
-    {
-        if ($this->rS->removeElement($r)) {
-            // set the owning side to null (unless already changed)
-            if ($r->getUser() === $this) {
-                $r->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
    
 }

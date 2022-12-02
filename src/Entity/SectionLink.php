@@ -33,10 +33,9 @@ class SectionLink
     private $iconColor;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionLink", cascade={"persist", "remove"})
      */
     private $user;
-
 
     public function getId(): ?int
     {
@@ -86,9 +85,20 @@ class SectionLink
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setSectionLink(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getSectionLink() !== $this) {
+            $user->setSectionLink($this);
+        }
+
         $this->user = $user;
 
         return $this;
     }
+
 
 }
