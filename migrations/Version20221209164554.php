@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221206172648 extends AbstractMigration
+final class Version20221209164554 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -25,7 +25,7 @@ final class Version20221206172648 extends AbstractMigration
         $this->addSql('CREATE TABLE section_discount (id INT AUTO_INCREMENT NOT NULL, code VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, bg_color VARCHAR(255) NOT NULL, bg_code_color VARCHAR(255) NOT NULL, text_code_color VARCHAR(255) NOT NULL, bg_card_color VARCHAR(255) NOT NULL, text_card_color VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE section_link (id INT AUTO_INCREMENT NOT NULL, link VARCHAR(255) NOT NULL, bg_color VARCHAR(255) NOT NULL, icon_color VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE section_rs (id INT AUTO_INCREMENT NOT NULL, bg_color VARCHAR(255) NOT NULL, bg_btn_color VARCHAR(255) NOT NULL, text_btn_color VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE section_video (id INT AUTO_INCREMENT NOT NULL, logo VARCHAR(255) NOT NULL, bg_color VARCHAR(255) NOT NULL, alt_video VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE section_video (id INT AUTO_INCREMENT NOT NULL, link VARCHAR(255) NOT NULL, bg_color VARCHAR(255) NOT NULL, alt_video VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, section_discount_id INT DEFAULT NULL, section_link_id INT DEFAULT NULL, section_rs_id INT DEFAULT NULL, section_video_id INT DEFAULT NULL, section_company_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D6495A8D1E60 (section_discount_id), UNIQUE INDEX UNIQ_8D93D6497FE3CF7E (section_link_id), UNIQUE INDEX UNIQ_8D93D64932ED3086 (section_rs_id), UNIQUE INDEX UNIQ_8D93D649B9AC5A12 (section_video_id), UNIQUE INDEX UNIQ_8D93D649A2B2009 (section_company_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE rs ADD CONSTRAINT FK_95DC290DA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');

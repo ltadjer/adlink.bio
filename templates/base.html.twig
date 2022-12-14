@@ -2,9 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}- Adlink.bio{% endblock %}</title>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {{ include('_header.html.twig') }}
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        {{ include('_footer.html.twig') }}
     </body>
 </html>

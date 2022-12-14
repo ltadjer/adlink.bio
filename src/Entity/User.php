@@ -64,12 +64,29 @@ class User
      */
     private $sectionCompany;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Code::class, mappedBy="user")
+     */
+    private $codes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Link::class, mappedBy="user")
+     */
+    private $links;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     
 
     public function __construct()
     {
         $this->rS = new ArrayCollection();
         $this->RSs = new ArrayCollection();
+        $this->codes = new ArrayCollection();
+        $this->links = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,5 +220,76 @@ class User
 
         return $this;
     }
-   
+
+    /**
+     * @return Collection<int, Code>
+     */
+    public function getCodes(): Collection
+    {
+        return $this->codes;
+    }
+
+    public function addCode(Code $code): self
+    {
+        if (!$this->codes->contains($code)) {
+            $this->codes[] = $code;
+            $code->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCode(Code $code): self
+    {
+        if ($this->codes->removeElement($code)) {
+            // set the owning side to null (unless already changed)
+            if ($code->getUser() === $this) {
+                $code->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Link>
+     */
+    public function getLinks(): Collection
+    {
+        return $this->links;
+    }
+
+    public function addLink(Link $link): self
+    {
+        if (!$this->links->contains($link)) {
+            $this->links[] = $link;
+            $link->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(Link $link): self
+    {
+        if ($this->links->removeElement($link)) {
+            // set the owning side to null (unless already changed)
+            if ($link->getUser() === $this) {
+                $link->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
 }

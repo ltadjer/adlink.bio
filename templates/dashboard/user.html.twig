@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard {{user.name}} {{parent()}}{% endblock %}
+
+{% block body %}
+    <h1>Dashboard</h1>
+    <a href="/{{user.slug}}">Voir le site</a>
+    <section class="section-company">
+        <div class="section-title">
+            <h2>Section présentation</h2>
+            <label class="switch">
+                <span>Visible : non</span>
+                <input type="checkbox"><span class="slider round"></span>
+                <span>oui</span>
+            </label>
+        </div>
+        <div class="form-user">
+            <h3>Information de la section</h3>
+                {{ form(formCompany) }}
+            <h3>Style de la section</h3>
+                {{ form(formCompanyStyle) }}
+        </div>
+        <div class="render">
+            <h3>Rendu sur le site</h3>
+            <img src="" alt="">
+        </div>
+    </section>
+    <section class="section-video">
+        <div class="section-title">
+            <h2>Section vidéo</h2>
+            <label class="switch">
+                <span>Visible : non</span>
+                <input type="checkbox"><span class="slider round"></span>
+                <span>oui</span>
+            </label>
+        </div>
+        <div class="form-user">
+            <h3>Information de la section</h3>
+            <h3>Style de la section</h3>
+        </div>
+        <div class="render">
+            <h3>Rendu sur le site</h3>
+            <img src="" alt="">
+        </div>
+    </section>
+    <section class="section-discount">
+        <div class="section-title">
+            <h2>Section codes promo</h2>
+            <label class="switch">
+                <span>Visible : non</span>
+                <input type="checkbox"><span class="slider round"></span>
+                <span>oui</span>
+            </label>
+        </div>
+        <div class="form-user">
+            <h3>Information de la section</h3>
+            <h3>Style de la section</h3>
+        </div>
+        <div class="render">
+            <h3>Rendu sur le site</h3>
+            <img src="" alt="">
+        </div>
+    </section>
+    <section class="section-link">
+        <div class="section-title">
+            <h2>Section liens utiles</h2>
+            <label class="switch">
+                <span>Visible : non</span>
+                <input type="checkbox"><span class="slider round"></span>
+                <span>oui</span>
+            </label>
+        </div>
+        <div class="form-user">
+            <h3>Information de la section</h3>
+            <h3>Style de la section</h3>
+        </div>
+        <div class="render">
+            <h3>Rendu sur le site</h3>
+            <img src="" alt="">
+        </div>
+    </section>
+    <section class="section-rs">
+        <div class="section-title">
+            <h2>Section réseaux sociaux</h2>
+            <label class="switch">
+                <span>Visible : non</span>
+                <input type="checkbox"><span class="slider round"></span>
+                <span>oui</span>
+            </label>
+        </div>
+        <div class="form-user">
+            <h3>Information de la section</h3>
+            <h3>Style de la section</h3>
+        </div>
+        <div class="render">
+            <h3>Rendu sur le site</h3>
+            <img src="" alt="">
+        </div>
+    </section>
+
+{% endblock %}

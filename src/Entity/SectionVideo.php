@@ -20,7 +20,7 @@ class SectionVideo
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $logo;
+    private $link;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,14 +44,14 @@ class SectionVideo
         return $this->id;
     }
 
-    public function getLogo(): ?string
+    public function getLink(): ?string
     {
-        return $this->logo;
+        return $this->link;
     }
 
-    public function setLogo(string $logo): self
+    public function setLink(string $link): self
     {
-        $this->logo = $logo;
+        $this->link = $link;
 
         return $this;
     }

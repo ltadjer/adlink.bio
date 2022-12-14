@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Landing page {{parent()}}{% endblock %}
+
+{% block body %}
+    <section class="compagny">
+        <img src="{{user.sectionCompany.logo}}" alt="">
+        <h1>{{user.sectionCompany.title}}</h1>
+        <p>{{user.sectionCompany.baseline}}</p>
+    </section>
+    <section class="video">
+        <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="fullscreen"></iframe>
+        {# TO DO = remplacer valeur "watch?v=" par "embed/" #}
+    </section>
+    <section class="discount">
+        {% for code in user.codes %}
+            <div class="code">
+                <span class="btn btn-code">{{code.code}}</span>
+                <p>{{code.description}}</p>
+            </div>
+        {% endfor %}
+    </section>
+    <section class="link">
+        {% for link in user.links %}
+            <a target="_blank" href="{{link.link}}" class="btn btn-link">{{link.name}}</a>
+        {% endfor %}
+    </section>
+    <section class="rs">
+        {% for rs in user.RSs %}
+
+            <a target="_blank" href="{{rs.url ~ rs.slug}}" class="rs"><i class="fa-brands fa-{{rs.logo}}"></i>{{rs.name}}</a>
+        {% endfor %}
+    </section>
+{% endblock %}
