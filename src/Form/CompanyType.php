@@ -16,8 +16,8 @@ class CompanyType extends AbstractType
     {
         $builder
             ->add('logo')
-            ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :'])
-            ->add('baseline', TextareaType::class, ['label' => 'Baseline :'])
+            ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :', 'placeholder' => 'Ex : Adlink.bio'])
+            ->add('baseline', TextareaType::class, ['label' => 'Baseline :', 'placeholder' => 'Slogan'])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }
