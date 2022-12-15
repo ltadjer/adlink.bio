@@ -40,16 +40,6 @@ class User
     private $sectionDiscount;
 
     /**
-     * @ORM\OneToOne(targetEntity=SectionLink::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $sectionLink;
-
-    /**
-     * @ORM\OneToOne(targetEntity=SectionRS::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $sectionRS;
-
-    /**
      * @ORM\OneToMany(targetEntity=RS::class, mappedBy="user")
      */
     private $RSs;
@@ -78,6 +68,13 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\OneToOne(targetEntity=SectionLink::class, cascade={"persist", "remove"})
+     */
+    private $sectionLink;
+
+
 
     
 
@@ -139,30 +136,6 @@ class User
     public function setSectionDiscount(?SectionDiscount $sectionDiscount): self
     {
         $this->sectionDiscount = $sectionDiscount;
-
-        return $this;
-    }
-
-    public function getSectionLink(): ?SectionLink
-    {
-        return $this->sectionLink;
-    }
-
-    public function setSectionLink(?SectionLink $sectionLink): self
-    {
-        $this->sectionLink = $sectionLink;
-
-        return $this;
-    }
-
-    public function getSectionRS(): ?SectionRS
-    {
-        return $this->sectionRS;
-    }
-
-    public function setSectionRS(?SectionRS $sectionRS): self
-    {
-        $this->sectionRS = $sectionRS;
 
         return $this;
     }
@@ -289,6 +262,18 @@ class User
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSectionLink(): ?SectionLink
+    {
+        return $this->sectionLink;
+    }
+
+    public function setSectionLink(?SectionLink $sectionLink): self
+    {
+        $this->sectionLink = $sectionLink;
 
         return $this;
     }

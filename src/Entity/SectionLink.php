@@ -18,70 +18,59 @@ class SectionLink
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $bgColor;
+    private $bg_color;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $iconColor;
+    private $bg_btn_color;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionLink", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $user;
+    private $text_btn_color;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+
     public function getBgColor(): ?string
     {
-        return $this->bgColor;
+        return $this->bg_color;
     }
 
-    public function setBgColor(string $bgColor): self
+    public function setBgColor(?string $bg_color): self
     {
-        $this->bgColor = $bgColor;
+        $this->bg_color = $bg_color;
 
         return $this;
     }
 
-    public function getIconColor(): ?string
+    public function getBgBtnColor(): ?string
     {
-        return $this->iconColor;
+        return $this->bg_btn_color;
     }
 
-    public function setIconColor(string $iconColor): self
+    public function setBgBtnColor(?string $bg_btn_color): self
     {
-        $this->iconColor = $iconColor;
+        $this->bg_btn_color = $bg_btn_color;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getTextBtnColor(): ?string
     {
-        return $this->user;
+        return $this->text_btn_color;
     }
 
-    public function setUser(?User $user): self
+    public function setTextBtnColor(?string $text_btn_color): self
     {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setSectionLink(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getSectionLink() !== $this) {
-            $user->setSectionLink($this);
-        }
-
-        $this->user = $user;
+        $this->text_btn_color = $text_btn_color;
 
         return $this;
     }
-
-
 }

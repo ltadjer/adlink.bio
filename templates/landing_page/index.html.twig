@@ -26,9 +26,9 @@
         {% endfor %}
     </section>
     <section class="rs">
-        {% for rs in user.RSs %}
+        {% for network in user.Networks %}
 
-            <a target="_blank" href="{{rs.url ~ rs.slug}}" class="rs"><i class="fa-brands fa-{{rs.logo}}"></i>{{rs.name}}</a>
+            <a target="_blank" href="{{network.url ~ network.slug}}" class="rs"><i class="fa-brands fa-{{network.logo}}"></i></a>
         {% endfor %}
     </section>
 {% endblock %}
