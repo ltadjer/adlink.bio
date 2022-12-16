@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\SectionVideo;
+use App\Entity\SectionCompany;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<SectionVideo>
+ * @extends ServiceEntityRepository<SectionCompany>
  *
- * @method SectionVideo|null find($id, $lockMode = null, $lockVersion = null)
- * @method SectionVideo|null findOneBy(array $criteria, array $orderBy = null)
- * @method SectionVideo[]    findAll()
- * @method SectionVideo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SectionCompany|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SectionCompany|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SectionCompany[]    findAll()
+ * @method SectionCompany[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SectionVideoRepository extends ServiceEntityRepository
+class SectionCompanyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SectionVideo::class);
+        parent::__construct($registry, SectionCompany::class);
     }
 
-    public function save(SectionVideo $entity, bool $flush = false): void
+    public function save(SectionCompany $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class SectionVideoRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(SectionVideo $entity, bool $flush = false): void
+    public function remove(SectionCompany $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class SectionVideoRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return SectionVideo[] Returns an array of SectionVideo objects
+//     * @return SectionCompany[] Returns an array of SectionCompany objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class SectionVideoRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?SectionVideo
+//    public function findOneBySomeField($value): ?SectionCompany
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')

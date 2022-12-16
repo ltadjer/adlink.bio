@@ -21,7 +21,7 @@ class SectionLinkRepository extends ServiceEntityRepository
         parent::__construct($registry, SectionLink::class);
     }
 
-    public function add(SectionLink $entity, bool $flush = false): void
+    public function save(SectionLink $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

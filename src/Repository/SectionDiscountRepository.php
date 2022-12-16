@@ -21,7 +21,7 @@ class SectionDiscountRepository extends ServiceEntityRepository
         parent::__construct($registry, SectionDiscount::class);
     }
 
-    public function add(SectionDiscount $entity, bool $flush = false): void
+    public function save(SectionDiscount $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

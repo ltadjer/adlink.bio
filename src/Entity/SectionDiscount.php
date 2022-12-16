@@ -5,48 +5,28 @@ namespace App\Entity;
 use App\Repository\SectionDiscountRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SectionDiscountRepository::class)
- */
+#[ORM\Entity(repositoryClass: SectionDiscountRepository::class)]
 class SectionDiscount
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $bgColor;
+    #[ORM\Column(length: 255)]
+    private ?string $bgColor = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $bgCodeColor;
+    #[ORM\Column(length: 255)]
+    private ?string $bgCodeColor = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $textCodeColor;
+    #[ORM\Column(length: 255)]
+    private ?string $textCodeColor = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $bgCardColor;
+    #[ORM\Column(length: 255)]
+    private ?string $bgCardColor = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $textCardColor;
-
-    /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionDiscount", cascade={"persist", "remove"})
-     */
-    private $user;
-
+    #[ORM\Column(length: 255)]
+    private ?string $textCardColor = null;
 
     public function getId(): ?int
     {
@@ -112,28 +92,4 @@ class SectionDiscount
 
         return $this;
     }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setSectionDiscount(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getSectionDiscount() !== $this) {
-            $user->setSectionDiscount($this);
-        }
-
-        $this->user = $user;
-
-        return $this;
-    }
-
-
 }

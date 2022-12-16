@@ -7,82 +7,59 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(length: 255)]
+    private ?string $pseudo = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity=SectionDiscount::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $sectionDiscount;
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=RS::class, mappedBy="user")
-     */
-    private $RSs;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Code::class)]
+    private Collection $codes;
 
-    /**
-     * @ORM\OneToOne(targetEntity=SectionVideo::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $sectionVideo;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Network::class)]
+    private Collection $networks;
 
-    /**
-     * @ORM\OneToOne(targetEntity=SectionCompany::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $sectionCompany;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class)]
+    private Collection $links;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Code::class, mappedBy="user")
-     */
-    private $codes;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SectionCompany $sectionCompany = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Link::class, mappedBy="user")
-     */
-    private $links;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SectionVideo $sectionVideo = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SectionDiscount $sectionDiscount = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity=SectionLink::class, cascade={"persist", "remove"})
-     */
-    private $sectionLink;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SectionLink $sectionLink = null;
 
-
-
-    
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?SectionNetwork $sectionNetwork = null;
 
     public function __construct()
     {
-        $this->rS = new ArrayCollection();
-        $this->RSs = new ArrayCollection();
         $this->codes = new ArrayCollection();
+        $this->networks = new ArrayCollection();
         $this->links = new ArrayCollection();
     }
 
@@ -91,14 +68,14 @@ class User
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getPseudo(): ?string
     {
-        return $this->name;
+        return $this->pseudo;
     }
 
-    public function setName(string $name): self
+    public function setPseudo(string $pseudo): self
     {
-        $this->name = $name;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -127,69 +104,14 @@ class User
         return $this;
     }
 
-
-    public function getSectionDiscount(): ?SectionDiscount
+    public function getSlug(): ?string
     {
-        return $this->sectionDiscount;
+        return $this->slug;
     }
 
-    public function setSectionDiscount(?SectionDiscount $sectionDiscount): self
+    public function setSlug(string $slug): self
     {
-        $this->sectionDiscount = $sectionDiscount;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, RS>
-     */
-    public function getRSs(): Collection
-    {
-        return $this->RSs;
-    }
-
-    public function addRSs(RS $rSs): self
-    {
-        if (!$this->RSs->contains($rSs)) {
-            $this->RSs[] = $rSs;
-            $rSs->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRSs(RS $rSs): self
-    {
-        if ($this->RSs->removeElement($rSs)) {
-            // set the owning side to null (unless already changed)
-            if ($rSs->getUser() === $this) {
-                $rSs->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getSectionVideo(): ?SectionVideo
-    {
-        return $this->sectionVideo;
-    }
-
-    public function setSectionVideo(?SectionVideo $sectionVideo): self
-    {
-        $this->sectionVideo = $sectionVideo;
-
-        return $this;
-    }
-
-    public function getSectionCompany(): ?SectionCompany
-    {
-        return $this->sectionCompany;
-    }
-
-    public function setSectionCompany(?SectionCompany $sectionCompany): self
-    {
-        $this->sectionCompany = $sectionCompany;
+        $this->slug = $slug;
 
         return $this;
     }
@@ -205,7 +127,7 @@ class User
     public function addCode(Code $code): self
     {
         if (!$this->codes->contains($code)) {
-            $this->codes[] = $code;
+            $this->codes->add($code);
             $code->setUser($this);
         }
 
@@ -225,6 +147,36 @@ class User
     }
 
     /**
+     * @return Collection<int, Network>
+     */
+    public function getNetworks(): Collection
+    {
+        return $this->networks;
+    }
+
+    public function addNetwork(Network $network): self
+    {
+        if (!$this->networks->contains($network)) {
+            $this->networks->add($network);
+            $network->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNetwork(Network $network): self
+    {
+        if ($this->networks->removeElement($network)) {
+            // set the owning side to null (unless already changed)
+            if ($network->getUser() === $this) {
+                $network->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Link>
      */
     public function getLinks(): Collection
@@ -235,7 +187,7 @@ class User
     public function addLink(Link $link): self
     {
         if (!$this->links->contains($link)) {
-            $this->links[] = $link;
+            $this->links->add($link);
             $link->setUser($this);
         }
 
@@ -254,14 +206,38 @@ class User
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getSectionCompany(): ?SectionCompany
     {
-        return $this->slug;
+        return $this->sectionCompany;
     }
 
-    public function setSlug(string $slug): self
+    public function setSectionCompany(SectionCompany $sectionCompany): self
     {
-        $this->slug = $slug;
+        $this->sectionCompany = $sectionCompany;
+
+        return $this;
+    }
+
+    public function getSectionVideo(): ?SectionVideo
+    {
+        return $this->sectionVideo;
+    }
+
+    public function setSectionVideo(SectionVideo $sectionVideo): self
+    {
+        $this->sectionVideo = $sectionVideo;
+
+        return $this;
+    }
+
+    public function getSectionDiscount(): ?SectionDiscount
+    {
+        return $this->sectionDiscount;
+    }
+
+    public function setSectionDiscount(SectionDiscount $sectionDiscount): self
+    {
+        $this->sectionDiscount = $sectionDiscount;
 
         return $this;
     }
@@ -271,9 +247,21 @@ class User
         return $this->sectionLink;
     }
 
-    public function setSectionLink(?SectionLink $sectionLink): self
+    public function setSectionLink(SectionLink $sectionLink): self
     {
         $this->sectionLink = $sectionLink;
+
+        return $this;
+    }
+
+    public function getSectionNetwork(): ?SectionNetwork
+    {
+        return $this->sectionNetwork;
+    }
+
+    public function setSectionNetwork(SectionNetwork $sectionNetwork): self
+    {
+        $this->sectionNetwork = $sectionNetwork;
 
         return $this;
     }

@@ -3,35 +3,26 @@
 namespace App\Entity;
 
 use App\Repository\CodeRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CodeRepository::class)
- */
+#[ORM\Entity(repositoryClass: CodeRepository::class)]
 class Code
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $code;
+    #[ORM\Column(length: 255)]
+    private ?string $code = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $description;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $descripton = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="codes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+    #[ORM\ManyToOne(inversedBy: 'codes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -43,21 +34,21 @@ class Code
         return $this->code;
     }
 
-    public function setCode(?string $code): self
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescripton(): ?string
     {
-        return $this->description;
+        return $this->descripton;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescripton(string $descripton): self
     {
-        $this->description = $description;
+        $this->descripton = $descripton;
 
         return $this;
     }

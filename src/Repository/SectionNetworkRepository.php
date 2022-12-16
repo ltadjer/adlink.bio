@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\SectionCompany;
+use App\Entity\SectionNetwork;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<SectionCompany>
+ * @extends ServiceEntityRepository<SectionNetwork>
  *
- * @method SectionCompany|null find($id, $lockMode = null, $lockVersion = null)
- * @method SectionCompany|null findOneBy(array $criteria, array $orderBy = null)
- * @method SectionCompany[]    findAll()
- * @method SectionCompany[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SectionNetwork|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SectionNetwork|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SectionNetwork[]    findAll()
+ * @method SectionNetwork[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SectionCompanyRepository extends ServiceEntityRepository
+class SectionNetworkRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SectionCompany::class);
+        parent::__construct($registry, SectionNetwork::class);
     }
 
-    public function add(SectionCompany $entity, bool $flush = false): void
+    public function save(SectionNetwork $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class SectionCompanyRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(SectionCompany $entity, bool $flush = false): void
+    public function remove(SectionNetwork $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class SectionCompanyRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return SectionCompany[] Returns an array of SectionCompany objects
+//     * @return SectionNetwork[] Returns an array of SectionNetwork objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class SectionCompanyRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?SectionCompany
+//    public function findOneBySomeField($value): ?SectionNetwork
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')

@@ -5,39 +5,22 @@ namespace App\Entity;
 use App\Repository\SectionVideoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SectionVideoRepository::class)
- */
+#[ORM\Entity(repositoryClass: SectionVideoRepository::class)]
 class SectionVideo
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $link;
+    #[ORM\Column(length: 255)]
+    private ?string $link = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $bgCOlor;
+    #[ORM\Column(length: 255)]
+    private ?string $altVideo = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $altVideo;
-
-    /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="sectionVideo", cascade={"persist", "remove"})
-     */
-    private $user;
-
-
+    #[ORM\Column(length: 255)]
+    private ?string $bgColor = null;
 
     public function getId(): ?int
     {
@@ -56,18 +39,6 @@ class SectionVideo
         return $this;
     }
 
-    public function getBgCOlor(): ?string
-    {
-        return $this->bgCOlor;
-    }
-
-    public function setBgCOlor(string $bgCOlor): self
-    {
-        $this->bgCOlor = $bgCOlor;
-
-        return $this;
-    }
-
     public function getAltVideo(): ?string
     {
         return $this->altVideo;
@@ -80,27 +51,15 @@ class SectionVideo
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getBgColor(): ?string
     {
-        return $this->user;
+        return $this->bgColor;
     }
 
-    public function setUser(?User $user): self
+    public function setBgColor(string $bgColor): self
     {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setSectionVideo(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getSectionVideo() !== $this) {
-            $user->setSectionVideo($this);
-        }
-
-        $this->user = $user;
+        $this->bgColor = $bgColor;
 
         return $this;
     }
-
-
 }

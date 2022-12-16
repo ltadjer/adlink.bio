@@ -5,71 +5,60 @@ namespace App\Entity;
 use App\Repository\SectionLinkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SectionLinkRepository::class)
- */
+#[ORM\Entity(repositoryClass: SectionLinkRepository::class)]
 class SectionLink
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $bg_color;
+    #[ORM\Column(length: 255)]
+    private ?string $bgColor = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $bg_btn_color;
+    #[ORM\Column(length: 255)]
+    private ?string $bgBtnColor = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $text_btn_color;
+    #[ORM\Column(length: 255)]
+    private ?string $textBtnColor = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-
     public function getBgColor(): ?string
     {
-        return $this->bg_color;
+        return $this->bgColor;
     }
 
-    public function setBgColor(?string $bg_color): self
+    public function setBgColor(string $bgColor): self
     {
-        $this->bg_color = $bg_color;
+        $this->bgColor = $bgColor;
 
         return $this;
     }
 
     public function getBgBtnColor(): ?string
     {
-        return $this->bg_btn_color;
+        return $this->bgBtnColor;
     }
 
-    public function setBgBtnColor(?string $bg_btn_color): self
+    public function setBgBtnColor(string $bgBtnColor): self
     {
-        $this->bg_btn_color = $bg_btn_color;
+        $this->bgBtnColor = $bgBtnColor;
 
         return $this;
     }
 
     public function getTextBtnColor(): ?string
     {
-        return $this->text_btn_color;
+        return $this->textBtnColor;
     }
 
-    public function setTextBtnColor(?string $text_btn_color): self
+    public function setTextBtnColor(string $textBtnColor): self
     {
-        $this->text_btn_color = $text_btn_color;
+        $this->textBtnColor = $textBtnColor;
 
         return $this;
     }

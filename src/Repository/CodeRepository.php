@@ -21,7 +21,7 @@ class CodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Code::class);
     }
 
-    public function add(Code $entity, bool $flush = false): void
+    public function save(Code $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
