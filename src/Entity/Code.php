@@ -17,8 +17,8 @@ class Code
     #[ORM\Column(length: 255)]
     private ?string $code = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $descripton = null;
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'codes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -41,14 +41,14 @@ class Code
         return $this;
     }
 
-    public function getDescripton(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descripton;
+        return $this->description;
     }
 
-    public function setDescripton(string $descripton): self
+    public function setDescription(string $description): self
     {
-        $this->descripton = $descripton;
+        $this->description = $description;
 
         return $this;
     }

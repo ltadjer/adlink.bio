@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard {{user.name}} {{parent()}}{% endblock %}
+{% block title %}Dashboard {{user.pseudo}} {{parent()}}{% endblock %}
 
 {% block body %}
     <h1>Dashboard</h1>
     <a href="/{{user.slug}}">Voir le site</a>
-    <section class="section-company">
+    <section class="section-company">   
         <div class="section-title">
             <h2>Section présentation</h2>
             <label class="switch">
@@ -22,7 +22,7 @@
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
-            <img src="" alt="">
+            <img src="{{ asset('img/s1.png') }}" alt="">
         </div>
     </section>
     <section class="section-video">
@@ -36,11 +36,13 @@
         </div>
         <div class="form-user">
             <h3>Information de la section</h3>
+                {{ form(formVideo) }}
             <h3>Style de la section</h3>
+                {{ form(formVideoStyle) }}
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
-            <img src="" alt="">
+            <img src="{{ asset('img/s2.png') }}" alt="">
         </div>
     </section>
     <section class="section-discount">
@@ -54,11 +56,13 @@
         </div>
         <div class="form-user">
             <h3>Information de la section</h3>
+                {{ form(formCode) }}
             <h3>Style de la section</h3>
+                {{ form(formCodeStyle) }}
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
-            <img src="" alt="">
+            <img src="{{ asset('img/s3.png') }}" alt="">
         </div>
     </section>
     <section class="section-link">
@@ -72,11 +76,13 @@
         </div>
         <div class="form-user">
             <h3>Information de la section</h3>
+                {{ form(formLink) }}
             <h3>Style de la section</h3>
+                {{ form(formLinkStyle) }}
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
-            <img src="" alt="">
+            <img src="{{ asset('img/s4.png') }}" alt="">
         </div>
     </section>
     <section class="section-rs">
@@ -90,11 +96,13 @@
         </div>
         <div class="form-user">
             <h3>Information de la section</h3>
+                {{ form(formNetwork) }}
             <h3>Style de la section</h3>
+                {{ form(formNetworkStyle) }}
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
-            <img src="" alt="">
+            <img src="{{ asset('img/s5.png') }}" alt="">
         </div>
     </section>
 

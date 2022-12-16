@@ -26,9 +26,25 @@
         {% endfor %}
     </section>
     <section class="rs">
-        {% for network in user.Networks %}
-
-            <a target="_blank" href="{{network.url ~ network.slug}}" class="rs"><i class="fa-brands fa-{{network.logo}}"></i></a>
+        {% for network in user.networks %}
+            {% if network.instagram %}
+                <a target="_blank" href="https://www.instagram.com/{{network.instagram}}" class="rs"><i class="fa-brands fa-instagram"></i></a>
+            {% endif %}
+            {% if network.facebook %}
+                <a target="_blank" href="https://www.facebook.com/{{network.facebook}}" class="rs"><i class="fa-brands fa-facebook-f"></i></a>
+            {% endif %}
+            {% if network.youtube %}
+                <a target="_blank" href="https://www.youtube.com/{{network.youtube}}" class="rs"><i class="fa-brands fa-youtube"></i></a>
+            {% endif %}
+            {% if network.gitHub %}
+                <a target="_blank" href="https://github.com/{{network.gitHub}}" class="rs"><i class="fa-brands fa-github"></i></a>
+            {% endif %}
+            {% if network.twitter %}
+                <a target="_blank" href="https://twitter.com/{{network.twitter}}" class="rs"><i class="fa-brands fa-twitter"></i></a>
+            {% endif %}
+            {% if network.tikTok %}
+                <a target="_blank" href="https://www.tiktok.com/{{network.tikTok}}" class="rs"><i class="fa-brands fa-tiktok"></i></a>                                              
+            {% endif %}
         {% endfor %}
     </section>
 {% endblock %}

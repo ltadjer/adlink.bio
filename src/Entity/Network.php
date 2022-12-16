@@ -13,73 +13,31 @@ class Network
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $logo = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $url = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $slug = null;
-
     #[ORM\ManyToOne(inversedBy: 'networks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $instagram;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $facebook;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $youtube;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $gitHub;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $twitter;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $tikTok;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(string $logo): self
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -90,6 +48,78 @@ class Network
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getYoutube(): ?string
+    {
+        return $this->youtube;
+    }
+
+    public function setYoutube(?string $youtube): self
+    {
+        $this->youtube = $youtube;
+
+        return $this;
+    }
+
+    public function getGitHub(): ?string
+    {
+        return $this->gitHub;
+    }
+
+    public function setGitHub(?string $gitHub): self
+    {
+        $this->gitHub = $gitHub;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): self
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    public function getTikTok(): ?string
+    {
+        return $this->tikTok;
+    }
+
+    public function setTikTok(?string $tikTok): self
+    {
+        $this->tikTok = $tikTok;
 
         return $this;
     }
