@@ -51,6 +51,9 @@ class User
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?SectionNetwork $sectionNetwork = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $font;
+
     public function __construct()
     {
         $this->codes = new ArrayCollection();
@@ -257,6 +260,18 @@ class User
     public function setSectionNetwork(SectionNetwork $sectionNetwork): self
     {
         $this->sectionNetwork = $sectionNetwork;
+
+        return $this;
+    }
+
+    public function getFont(): ?string
+    {
+        return $this->font;
+    }
+
+    public function setFont(?string $font): self
+    {
+        $this->font = $font;
 
         return $this;
     }
