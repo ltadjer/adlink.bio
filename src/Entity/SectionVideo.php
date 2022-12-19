@@ -22,6 +22,9 @@ class SectionVideo
     #[ORM\Column(length: 255)]
     private ?string $bgColor = null;
 
+    #[ORM\OneToOne(inversedBy: 'sectionVideo', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class SectionVideo
     public function setBgColor(string $bgColor): self
     {
         $this->bgColor = $bgColor;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

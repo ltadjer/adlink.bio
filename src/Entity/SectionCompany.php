@@ -31,6 +31,10 @@ class SectionCompany
     #[ORM\Column(length: 255)]
     private ?string $baselineColor = null;
 
+    #[ORM\OneToOne(inversedBy: 'sectionCompany', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +108,18 @@ class SectionCompany
     public function setBaselineColor(string $baselineColor): self
     {
         $this->baselineColor = $baselineColor;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

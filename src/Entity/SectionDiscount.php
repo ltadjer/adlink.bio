@@ -28,6 +28,9 @@ class SectionDiscount
     #[ORM\Column(length: 255)]
     private ?string $textCardColor = null;
 
+    #[ORM\OneToOne(inversedBy: 'sectionDiscount', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class SectionDiscount
     public function setTextCardColor(string $textCardColor): self
     {
         $this->textCardColor = $textCardColor;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

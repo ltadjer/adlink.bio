@@ -36,23 +36,24 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class)]
     private Collection $links;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?SectionCompany $sectionCompany = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?SectionVideo $sectionVideo = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?SectionDiscount $sectionDiscount = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?SectionLink $sectionLink = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?SectionNetwork $sectionNetwork = null;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $font;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionCompany::class, cascade: ['persist', 'remove'])]
+    private $sectionCompany;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionDiscount::class, cascade: ['persist', 'remove'])]
+    private $sectionDiscount;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionLink::class, cascade: ['persist', 'remove'])]
+    private $sectionLink;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionNetwork::class, cascade: ['persist', 'remove'])]
+    private $sectionNetwork;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionVideo::class, cascade: ['persist', 'remove'])]
+    private $sectionVideo;
+
 
     public function __construct()
     {
@@ -204,26 +205,36 @@ class User
         return $this;
     }
 
+    public function getFont(): ?string
+    {
+        return $this->font;
+    }
+
+    public function setFont(?string $font): self
+    {
+        $this->font = $font;
+
+        return $this;
+    }
+
     public function getSectionCompany(): ?SectionCompany
     {
         return $this->sectionCompany;
     }
 
-    public function setSectionCompany(SectionCompany $sectionCompany): self
+    public function setSectionCompany(?SectionCompany $sectionCompany): self
     {
+        // unset the owning side of the relation if necessary
+        if ($sectionCompany === null && $this->sectionCompany !== null) {
+            $this->sectionCompany->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($sectionCompany !== null && $sectionCompany->getUser() !== $this) {
+            $sectionCompany->setUser($this);
+        }
+
         $this->sectionCompany = $sectionCompany;
-
-        return $this;
-    }
-
-    public function getSectionVideo(): ?SectionVideo
-    {
-        return $this->sectionVideo;
-    }
-
-    public function setSectionVideo(SectionVideo $sectionVideo): self
-    {
-        $this->sectionVideo = $sectionVideo;
 
         return $this;
     }
@@ -233,8 +244,18 @@ class User
         return $this->sectionDiscount;
     }
 
-    public function setSectionDiscount(SectionDiscount $sectionDiscount): self
+    public function setSectionDiscount(?SectionDiscount $sectionDiscount): self
     {
+        // unset the owning side of the relation if necessary
+        if ($sectionDiscount === null && $this->sectionDiscount !== null) {
+            $this->sectionDiscount->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($sectionDiscount !== null && $sectionDiscount->getUser() !== $this) {
+            $sectionDiscount->setUser($this);
+        }
+
         $this->sectionDiscount = $sectionDiscount;
 
         return $this;
@@ -245,8 +266,18 @@ class User
         return $this->sectionLink;
     }
 
-    public function setSectionLink(SectionLink $sectionLink): self
+    public function setSectionLink(?SectionLink $sectionLink): self
     {
+        // unset the owning side of the relation if necessary
+        if ($sectionLink === null && $this->sectionLink !== null) {
+            $this->sectionLink->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($sectionLink !== null && $sectionLink->getUser() !== $this) {
+            $sectionLink->setUser($this);
+        }
+
         $this->sectionLink = $sectionLink;
 
         return $this;
@@ -257,21 +288,41 @@ class User
         return $this->sectionNetwork;
     }
 
-    public function setSectionNetwork(SectionNetwork $sectionNetwork): self
+    public function setSectionNetwork(?SectionNetwork $sectionNetwork): self
     {
+        // unset the owning side of the relation if necessary
+        if ($sectionNetwork === null && $this->sectionNetwork !== null) {
+            $this->sectionNetwork->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($sectionNetwork !== null && $sectionNetwork->getUser() !== $this) {
+            $sectionNetwork->setUser($this);
+        }
+
         $this->sectionNetwork = $sectionNetwork;
 
         return $this;
     }
 
-    public function getFont(): ?string
+    public function getSectionVideo(): ?SectionVideo
     {
-        return $this->font;
+        return $this->sectionVideo;
     }
 
-    public function setFont(?string $font): self
+    public function setSectionVideo(?SectionVideo $sectionVideo): self
     {
-        $this->font = $font;
+        // unset the owning side of the relation if necessary
+        if ($sectionVideo === null && $this->sectionVideo !== null) {
+            $this->sectionVideo->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($sectionVideo !== null && $sectionVideo->getUser() !== $this) {
+            $sectionVideo->setUser($this);
+        }
+
+        $this->sectionVideo = $sectionVideo;
 
         return $this;
     }
