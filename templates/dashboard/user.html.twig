@@ -18,6 +18,7 @@
             </label>
         </div>
         <div class="form-user">
+        {{ form_start(formCompany)}}
             <h3>Information de la section</h3>
                 {{ form_row(formCompany.logo)}}
                 {{ form_row(formCompany.title)}}
@@ -26,7 +27,8 @@
                 {{ form_row(formCompany.bgColor)}}
                 {{ form_row(formCompany.titleColor)}}
                 {{ form_row(formCompany.baselineColor)}}     
-                {{ form_rest(formCompany) }}           
+                {{ form_row(formCompany.save) }}           
+            {{ form_end(formCompany) }}           
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
@@ -43,12 +45,15 @@
             </label>
         </div>
         <div class="form-user">
+        {{ form_start(formVideo)}}
             <h3>Information de la section</h3>
                 {{ form_row(formVideo.link)}}         
                 {{ form_row(formVideo.altVideo)}}  
             <h3>Style de la section</h3>
                 {{ form_row(formVideo.bgColor)}}  
-                {{ form_rest(formVideo) }}       
+                {{ form_row(formVideo.save) }}           
+            {{ form_end(formVideo) }}           
+                 
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
