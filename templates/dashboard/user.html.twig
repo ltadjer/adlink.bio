@@ -19,9 +19,14 @@
         </div>
         <div class="form-user">
             <h3>Information de la section</h3>
-                {{ form(formCompany) }}
+                {{ form_row(formCompany.logo)}}
+                {{ form_row(formCompany.title)}}
+                {{ form_row(formCompany.baseline)}}    
             <h3>Style de la section</h3>
-                {{ form(formCompanyStyle) }}
+                {{ form_row(formCompany.bgColor)}}
+                {{ form_row(formCompany.titleColor)}}
+                {{ form_row(formCompany.baselineColor)}}     
+                {{ form_rest(formCompany) }}           
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
@@ -39,9 +44,11 @@
         </div>
         <div class="form-user">
             <h3>Information de la section</h3>
-                {{ form(formVideo) }}
+                {{ form_row(formVideo.link)}}         
+                {{ form_row(formVideo.altVideo)}}  
             <h3>Style de la section</h3>
-                {{ form(formVideoStyle) }}
+                {{ form_row(formVideo.bgColor)}}  
+                {{ form_rest(formVideo) }}       
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
@@ -61,7 +68,8 @@
             <h3>Information de la section</h3>
                 {{ form(formCode) }}
             <h3>Style de la section</h3>
-                {{ form(formCodeStyle) }}
+                {{ form(formDiscountStyle) }}
+
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
@@ -82,6 +90,7 @@
                 {{ form(formLink) }}
             <h3>Style de la section</h3>
                 {{ form(formLinkStyle) }}
+
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
@@ -102,11 +111,11 @@
                 {{ form(formNetwork) }}
             <h3>Style de la section</h3>
                 {{ form(formNetworkStyle) }}
+
         </div>
         <div class="render">
             <h3>Rendu sur le site</h3>
             <img src="{{ asset('img/s5.png') }}" alt="">
         </div>
     </section>
-
 {% endblock %}

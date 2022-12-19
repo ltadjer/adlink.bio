@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\SectionVideo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,6 +18,7 @@ class VideoType extends AbstractType
         $builder
             ->add('link', TextType::class, ['label' => 'Lien YouTube de la vidéo :'])
             ->add('altVideo', TextareaType::class, ['label' => 'Description de la vidéo :'])
+            ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :'])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }

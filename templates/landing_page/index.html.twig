@@ -3,6 +3,7 @@
 {% block title %}Landing page {{parent()}}{% endblock %}
 
 {% block body %}
+<div class="container" style= "font-family: {{user.font}}, Sans serif;">
     <section class="compagny">
         <img src="{{user.sectionCompany.logo}}" alt="">
         <h1>{{user.sectionCompany.title}}</h1>
@@ -47,4 +48,5 @@
             {% endif %}
         {% endfor %}
     </section>
+</div>
 {% endblock %}
