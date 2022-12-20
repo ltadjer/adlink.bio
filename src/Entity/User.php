@@ -30,9 +30,6 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Code::class)]
     private Collection $codes;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Network::class)]
-    private Collection $networks;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class)]
     private Collection $links;
 
@@ -53,6 +50,12 @@ class User
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionVideo::class, cascade: ['persist', 'remove'])]
     private $sectionVideo;
+
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Network::class, cascade: ['persist', 'remove'])]
+    private $network;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $createAt;
 
 
     public function __construct()
@@ -139,36 +142,6 @@ class User
             // set the owning side to null (unless already changed)
             if ($code->getUser() === $this) {
                 $code->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Network>
-     */
-    public function getNetworks(): Collection
-    {
-        return $this->networks;
-    }
-
-    public function addNetwork(Network $network): self
-    {
-        if (!$this->networks->contains($network)) {
-            $this->networks->add($network);
-            $network->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNetwork(Network $network): self
-    {
-        if ($this->networks->removeElement($network)) {
-            // set the owning side to null (unless already changed)
-            if ($network->getUser() === $this) {
-                $network->setUser(null);
             }
         }
 
@@ -323,6 +296,40 @@ class User
         }
 
         $this->sectionVideo = $sectionVideo;
+
+        return $this;
+    }
+
+    public function getNetwork(): ?Network
+    {
+        return $this->network;
+    }
+
+    public function setNetwork(?Network $network): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($network === null && $this->network !== null) {
+            $this->network->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($network !== null && $network->getUser() !== $this) {
+            $network->setUser($this);
+        }
+
+        $this->network = $network;
+
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeImmutable
+    {
+        return $this->createAt;
+    }
+
+    public function setCreateAt(\DateTimeImmutable $createAt): self
+    {
+        $this->createAt = $createAt;
 
         return $this;
     }

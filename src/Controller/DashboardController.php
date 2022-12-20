@@ -30,16 +30,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function admin(): Response
+    public function admin(UserRepository $userRepository): Response
     {
+        $users = $userRepository->findAll();
+
+        // Faire fonction delete pour un user
 
         return $this->render('dashboard/admin.html.twig', [
+            'users' => $users
         ]);
     }
+
+
+
+
     #[Route('/{slug}/admin', name: 'app_adminUser')]
-    public function adminUser( UserRepository $user, $slug, Request $request, ManagerRegistry $doctrine): Response
+    public function adminUser( UserRepository $userRepository, $slug, Request $request, ManagerRegistry $doctrine): Response
     {
-        //entité à apart pour les typos ?
 
         $company = new SectionCompany();
         $video = new SectionVideo();
@@ -51,11 +58,9 @@ class DashboardController extends AbstractController
         $networkStyle = new SectionNetwork();
 
         
+        $user = $userRepository->findOneBy(['slug' => $slug]);
 
-        
-        $slugUser = $user->findOneBy(['slug' => $slug]);
-
-        $font = $user->find($slugUser);
+        $font = $userRepository->find($user);
 
 
         $formFont = $this->createForm(FontType::class, $font);
@@ -70,62 +75,100 @@ class DashboardController extends AbstractController
         $formLink = $this->createForm(LinkType::class, $link);
         $formLinkStyle = $this->createForm(LinkStyleType::class, $linkStyle);
 
-
         $formNetwork = $this->createForm(NetworkType::class, $network);
         $formNetworkStyle = $this->createForm(NetworkStyleType::class, $networkStyle);
+
 
         $formFont->handleRequest($request);
         $formCompany->handleRequest($request);
         $formVideo->handleRequest($request);
         $formCode->handleRequest($request);
+        $formDiscountStyle->handleRequest($request);
         $formLink->handleRequest($request);
         $formLinkStyle->handleRequest($request);
         $formNetwork->handleRequest($request);
         $formNetworkStyle->handleRequest($request);
 
         
+        // Envoie du formulaire TYPO
         if ($formFont->isSubmitted()) {
 			$em = $doctrine->getManager();
 			$em->persist($font);
 			$em->flush();
 		}
+
+        // Envoie du formulaire COMPANY INFO + STYLE
 		if ($formCompany->isSubmitted()) {
+            $company->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($company);
 			$em->flush();
+            // if ($formCompany['logo']== null){
+            //     $formCompany['logo']== 'test';
+            // }
+            // test d'une valeur par défault
+
 		}
+
+        // Envoie du formulaire VIDEO INFO + STYLE
         if ($formVideo->isSubmitted()) {
+            $video->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($video);
 			$em->flush();
 		}
+
+        // Envoie du formulaire CODE INFO
         if ($formCode->isSubmitted()) {
+            $code->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($code);
 			$em->flush();
 		}
+
+        // Envoie du formulaire DISCOUNT STYLE
+        if ($formDiscountStyle->isSubmitted()) {
+            $discountStyle->setUser($user);
+			$em = $doctrine->getManager();
+			$em->persist($discountStyle);
+			$em->flush();
+		}
+
+        // Envoie du formulaire LINK INFO
         if ($formLink->isSubmitted()) {
+            $link->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($link);
 			$em->flush();
 		}
+
+        // Envoie du formulaire LINK STYLE
         if ($formLinkStyle->isSubmitted()) {
+            $linkStyle->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($linkStyle);
 			$em->flush();
 		}
+
+        // Envoie du formulaire NETWORK INFO
         if ($formNetwork->isSubmitted()) {
+            $network->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($network);
 			$em->flush();
 		}
+
+        // Envoie du formulaire NETWORK STYLE
         if ($formNetworkStyle->isSubmitted()) {
+            $networkStyle->setUser($user);
 			$em = $doctrine->getManager();
 			$em->persist($networkStyle);
 			$em->flush();
 		}
+
+        
         return $this->render('dashboard/user.html.twig', [
-            "user" => $slugUser,
+            "user" => $user,
 
             'formFont' => $formFont->createView(),
 

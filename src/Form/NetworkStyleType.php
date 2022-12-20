@@ -14,8 +14,8 @@ class NetworkStyleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :'])
-        ->add('iconColor', ColorType::class,['label' => 'Couleur des icônes :'])
+        ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
+        ->add('iconColor', ColorType::class,['label' => 'Couleur des icônes :', 'required' => false])
         ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }

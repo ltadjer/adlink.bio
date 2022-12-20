@@ -16,9 +16,9 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('link', TextType::class, ['label' => 'Lien YouTube de la vidéo :'])
-            ->add('altVideo', TextareaType::class, ['label' => 'Description de la vidéo :'])
-            ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :'])
+            ->add('link', TextType::class, ['label' => 'Lien YouTube de la vidéo :', 'required' => false])
+            ->add('altVideo', TextareaType::class, ['label' => 'Description de la vidéo :', 'required' => false])
+            ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }

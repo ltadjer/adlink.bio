@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CompanyType extends AbstractType
@@ -16,12 +17,12 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('logo')
-            ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :'])
-            ->add('baseline', TextareaType::class, ['label' => 'Baseline :'])
-            ->add('bgColor', ColorType::class ,['label' => 'Couleur de l\'arrière-plan :'])
-            ->add('titleColor', ColorType::class ,['label' => 'Couleur du titre :'])
-            ->add('baselineColor', ColorType::class ,['label' => 'Couleur de la baseline :'])
+            ->add('logoFile', VichImageType::class, ['label' => 'logo :', 'required' => false, 'download_label' => false])
+            ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :', 'required' => false])
+            ->add('baseline', TextareaType::class, ['label' => 'Baseline :', 'required' => false])
+            ->add('bgColor', ColorType::class ,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
+            ->add('titleColor', ColorType::class ,['label' => 'Couleur du titre :', 'required' => false])
+            ->add('baselineColor', ColorType::class ,['label' => 'Couleur de la baseline :', 'required' => false])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }

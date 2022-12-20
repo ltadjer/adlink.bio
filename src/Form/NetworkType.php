@@ -14,12 +14,12 @@ class NetworkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('instagram', TextType::class, ['label' => 'Lien Instagram :'])
-            ->add('facebook', TextType::class, ['label' => 'Lien Facebook :'])
-            ->add('youtube', TextType::class, ['label' => 'Lien Youtube :'])
-            ->add('gitHub', TextType::class, ['label' => 'Lien GitHub :'])
-            ->add('twitter', TextType::class, ['label' => 'Lien Twitter :'])
-            ->add('tikTok', TextType::class, ['label' => 'Lien Tik Tok :'])
+            ->add('instagram', TextType::class, ['label' => 'Lien Instagram :', 'required' => false])
+            ->add('facebook', TextType::class, ['label' => 'Lien Facebook :', 'required' => false])
+            ->add('youtube', TextType::class, ['label' => 'Lien Youtube :', 'required' => false])
+            ->add('gitHub', TextType::class, ['label' => 'Lien GitHub :', 'required' => false])
+            ->add('twitter', TextType::class, ['label' => 'Lien Twitter :', 'required' => false])
+            ->add('tikTok', TextType::class, ['label' => 'Lien Tik Tok :', 'required' => false])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
         ;
     }

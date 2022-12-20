@@ -3,50 +3,47 @@
 {% block title %}Landing page {{parent()}}{% endblock %}
 
 {% block body %}
-<div class="container" style= "font-family: {{user.font}}, Sans serif;">
-    <section class="compagny">
-        <img src="{{user.sectionCompany.logo}}" alt="">
-        <h1>{{user.sectionCompany.title}}</h1>
-        <p>{{user.sectionCompany.baseline}}</p>
-    </section>
-    <section class="video">
-        <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="fullscreen"></iframe>
-        {# TO DO = remplacer valeur "watch?v=" par "embed/" #}
-    </section>
-    <section class="discount">
-        {% for code in user.codes %}
-            <div class="code">
-                <span class="btn btn-code">{{code.code}}</span>
-                <p>{{code.description}}</p>
-            </div>
-        {% endfor %}
-    </section>
-    <section class="link">
-        {% for link in user.links %}
-            <a target="_blank" href="{{link.link}}" class="btn btn-link">{{link.name}}</a>
-        {% endfor %}
-    </section>
-    <section class="rs">
-        {% for network in user.networks %}
-            {% if network.instagram %}
-                <a target="_blank" href="https://www.instagram.com/{{network.instagram}}" class="rs"><i class="fa-brands fa-instagram"></i></a>
+    <div class="container" style= "font-family: {{user.font}}, Sans serif;">
+        <section class="compagny" style="background-color:{{ user.sectionCompany.bgColor }}">
+            <img src="{{ vich_uploader_asset(user.sectionCompany, 'logoFile') }}">
+            <h1 style="color:{{ user.sectionCompany.titleColor }}">{{user.sectionCompany.title}}</h1>
+            <p style="color:{{ user.sectionCompany.baselineColor }}">{{user.sectionCompany.baseline}}</p>
+        </section>
+        <section class="video" style="background-color:{{user.sectionVideo.bgColor}}">
+            <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="fullscreen"></iframe>
+        </section>
+        <section class="discount" style="background-color:{{user.sectionDiscount.bgColor}}">
+            {% for code in user.codes %}
+                <div class="code">
+                    <span class="btn btn-code" style="background-color:{{ user.sectionDiscount.bgCodeColor }}; color:{{ user.sectionDiscount.textCodeColor }}">{{code.code}}</span>
+                    <p style="background-color:{{ user.sectionDiscount.bgCardColor }}; color:{{ user.sectionDiscount.textCardColor }}">{{code.description}}</p>
+                </div>
+            {% endfor %}
+        </section>
+        <section class="link" style="background-color:{{user.sectionLink.bgColor}}">
+            {% for link in user.links %}
+                <a target="_blank" href="{{link.link}}" class="btn btn-link" style="background-color:{{ user.sectionLink.bgBtnColor }}; color:{{ user.sectionLink.textBtnColor }}">{{link.name}}</a>
+            {% endfor %}
+        </section>
+        <section class="rs" style="background-color:{{user.sectionNetwork.bgColor}}">
+            {% if user.network.instagram %}
+                <a target="_blank" href="https://www.instagram.com/{{user.network.instagram}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-instagram" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
             {% endif %}
-            {% if network.facebook %}
-                <a target="_blank" href="https://www.facebook.com/{{network.facebook}}" class="rs"><i class="fa-brands fa-facebook-f"></i></a>
+            {% if user.network.facebook %}
+                <a target="_blank" href="https://www.facebook.com/{{user.network.facebook}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-facebook-f" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
             {% endif %}
-            {% if network.youtube %}
-                <a target="_blank" href="https://www.youtube.com/{{network.youtube}}" class="rs"><i class="fa-brands fa-youtube"></i></a>
+            {% if user.network.youtube %}
+                <a target="_blank" href="https://www.youtube.com/{{user.network.youtube}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-youtube" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
             {% endif %}
-            {% if network.gitHub %}
-                <a target="_blank" href="https://github.com/{{network.gitHub}}" class="rs"><i class="fa-brands fa-github"></i></a>
+            {% if user.network.gitHub %}
+                <a target="_blank" href="https://github.com/{{user.network.gitHub}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-github" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
             {% endif %}
-            {% if network.twitter %}
-                <a target="_blank" href="https://twitter.com/{{network.twitter}}" class="rs"><i class="fa-brands fa-twitter"></i></a>
+            {% if user.network.twitter %}
+                <a target="_blank" href="https://twitter.com/{{user.network.twitter}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-twitter" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
             {% endif %}
-            {% if network.tikTok %}
-                <a target="_blank" href="https://www.tiktok.com/{{network.tikTok}}" class="rs"><i class="fa-brands fa-tiktok"></i></a>                                              
+            {% if user.network.tikTok %}
+                <a target="_blank" href="https://www.tiktok.com/{{user.network.tikTok}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-tiktok" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>                                              
             {% endif %}
-        {% endfor %}
-    </section>
-</div>
+        </section>
+    </div>
 {% endblock %}

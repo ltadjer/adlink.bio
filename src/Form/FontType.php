@@ -14,7 +14,7 @@ class FontType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('font', ChoiceType::class, ['label' => 'Police du site',
+            ->add('font', ChoiceType::class, ['label' => 'Police du site :',
                 'choices' => [
                     'Roboto' => 'Roboto',
                     'Montserrat' => 'Montserrat',

@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\SectionCompanyRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SectionCompanyRepository::class)]
+#[Vich\Uploadable]
 class SectionCompany
 {
     #[ORM\Id]
@@ -15,6 +18,13 @@ class SectionCompany
 
     #[ORM\Column(length: 255)]
     private ?string $logo = null;
+
+ 
+    #[Vich\UploadableField(mapping: 'logo_user', fileNameProperty: 'logo')]
+    private ?File $logoFile = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $UpdatedAt;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -40,6 +50,23 @@ class SectionCompany
         return $this->id;
     }
 
+    public function setLogoFile(?File $logoFile = null): void
+    {
+        $this->logoFile = $logoFile;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if (null !== $logoFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTimeImmutable('now');
+        }
+    }
+
+    public function getLogoFile(): ?File
+    {
+        return $this->logoFile; 
+    }
     public function getLogo(): ?string
     {
         return $this->logo;
