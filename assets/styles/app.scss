@@ -1,4 +1,254 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+$mainColor : #009BE3;
+$secondaryColor : #000000;
+$white :#fff;
+
+a {
+    color: $secondaryColor;
+}
+
 body {
     background-color: #ffffff;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
+
+    header {
+        box-shadow: #00000029 0 0 15px;
+        background: $white;
+        display: flex;
+        justify-content: center;
+        padding: 0.8rem 0;
+        margin-bottom: 2.5rem;
+
+        .logo{
+            height: 3.5rem;
+        }
+    }
+    .btn-admin {
+        background-color: $mainColor;
+        color: $white;
+        padding: 8px 18px;
+        font-family: 'Roboto';
+        border-radius: 25px;
+        font-size: 0.8rem;
+        border: $mainColor solid 2px;
+        &:hover {
+        background-color: $white;
+        color: $mainColor;
+        }
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 1024px;
+        margin: 0 auto;
+
+        .btn-save {
+            background-color: $mainColor;
+            color: $white;
+            padding: 6px 12px;
+            font-family: 'Roboto';
+            border-radius: 25px;
+            font-size: 0.7rem;
+            border: $mainColor solid 2px;
+            &:hover {
+            background-color: $white;
+            color: $mainColor;
+            }
+        } 
+
+        .title {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: $secondaryColor;
+            margin-bottom: 1.5rem;
+
+            h1 {
+                text-align: center;
+                font-family: 'Audiowide';
+            }
+
+            .logout {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                right: 0;
+                gap: 10px;
+
+                svg {
+                    color: $mainColor;
+                }
+            }
+        }
+        .font-form{
+            margin: 1.5rem 0;
+            & form {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                :nth-child(1) {
+                    gap: 1rem;
+                    display: flex;
+                    select {
+                        font-family: 'Roboto';
+                        color: $mainColor;
+                        border: 1px solid $secondaryColor;
+                        border-radius: 8px;
+                        padding: 0 2px;
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            width: 100%;
+
+            section {
+                box-shadow: #00000040 0 0 30px;
+                border-radius: 20px;
+                padding: 20px 40px 40px 40px;
+                width: 100%;
+
+                .section-title {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    justify-content: center;
+                    margin-bottom: 1.5rem;
+
+                    h2 {
+                        font-weight: 400;
+                    }
+
+                    .visible {
+                        font-family: 'Roboto';
+                        position: absolute;
+                        right: 0;
+
+                        /* Rounded sliders */
+                        .toggle {
+                            position: relative;
+                            display: inline-block;
+                            width: 45px;
+                            height: 25px;
+
+                            .toggle-off {
+                                position: absolute;
+                                left: 0;
+                            }
+                            .toggle-on {
+                                position: absolute;
+                                left: 0;
+                            }
+
+                            input {
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            }
+                        }
+
+                        .slider {
+                            position: absolute;
+                            cursor: pointer;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-color: $white;
+                            border: $secondaryColor solid 2px;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+
+                            &:before {
+                                position: absolute;
+                                content: "";
+                                height: 19px;
+                                width: 19px;
+                                left: 1px;
+                                bottom: 1.5px;
+                                background-color: $mainColor;
+                                -webkit-transition: .4s;
+                                transition: .4s;
+                            }
+                        }
+                        input {
+                            &:checked {
+                                + {
+                                    .slider {
+                                        background-color: $white;
+
+                                        &:before {
+                                            -webkit-transform: translateX(19.5px);
+                                            -ms-transform: translateX(19.5px);
+                                            transform: translateX(19.5px);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .slider.round {
+                            border-radius: 35px;
+
+                            &:before {
+                                border-radius: 50%;
+                            }
+                        }
+                    }
+                }
+
+                .section-content {
+                    display: flex;
+                    justify-content: center;
+
+                    h3 {
+                        font-weight: 400;
+                        color: $mainColor;
+                    }
+
+                    .form-user {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    .render {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        img {
+                            display: block;
+                            height: auto;
+                            width: 100%;
+                            border-radius: 15px;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 }

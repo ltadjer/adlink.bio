@@ -28,8 +28,8 @@ class FontType extends AbstractType
                     'Kalam'=> 'Kalam',
                     'Turret Road'=> 'Turret Road',
                     'Gluten'=> 'Gluten',
-                ]])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
+                ], 'attr' => ['class' => 'font-select']])
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }
 
