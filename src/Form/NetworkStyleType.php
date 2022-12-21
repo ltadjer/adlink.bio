@@ -16,7 +16,7 @@ class NetworkStyleType extends AbstractType
         $builder
         ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
         ->add('iconColor', ColorType::class,['label' => 'Couleur des icônes :', 'required' => false])
-        ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
+        ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }
 

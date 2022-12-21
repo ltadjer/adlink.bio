@@ -16,7 +16,7 @@ class CodeType extends AbstractType
         $builder
             ->add('code', TextType::class, ['label' => 'Code promo :'])
             ->add('description', TextType::class, ['label' => 'Description du code :'])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }
 

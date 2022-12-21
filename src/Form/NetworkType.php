@@ -20,7 +20,7 @@ class NetworkType extends AbstractType
             ->add('gitHub', TextType::class, ['label' => 'Lien GitHub :', 'required' => false])
             ->add('twitter', TextType::class, ['label' => 'Lien Twitter :', 'required' => false])
             ->add('tikTok', TextType::class, ['label' => 'Lien Tik Tok :', 'required' => false])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }
 

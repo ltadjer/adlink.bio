@@ -6,7 +6,7 @@
     <div class="container">
         <div class="title">
             <h1>Dashboard</h1>
-            <a href="" class="logout">Déconnexion<i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            <a href="{{ path('app_logout') }}" class="btn-title">Déconnexion<i class="fa-solid fa-arrow-right-from-bracket"></i></a>
         </div>
         <p>Nombre de clients : </p>
         <div class="table">
@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{user.pseudo}}</td>
                         <td>{{user.slug}}</td>
-                        <td>{{ user.createAt|date('d/m/Y') }}</td>
+                        <td>{{ user.createdAt|date('d/m/Y') }}</td>
                         <td>{{user.email}}</td>
                         <td>
                             <a href="{{ path('app_landing', {slug: user.slug}) }}"><i class="fa-regular fa-eye"></i></a>

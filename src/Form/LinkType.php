@@ -16,7 +16,7 @@ class LinkType extends AbstractType
         $builder
             ->add('name', TextType::class, ['label' => 'Nom du lien :'])
             ->add('link', TextType::class, ['label' => 'Lien :'])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
+            ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }
 

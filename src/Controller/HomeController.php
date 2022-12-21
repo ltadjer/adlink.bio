@@ -14,12 +14,12 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
         ]);
     }
-    #[Route('/politque-de-confidentialite', name: 'app_confidentialite')]
+    #[Route('/politque-de-confidentialite', priority: 1, name: 'app_confidentialite')]
     public function confidentialite(): Response
     {
         return $this->render('home/confidentialite.html.twig');
     }
-    #[Route('/mentions-legales', name: 'app_mentions')]
+    #[Route('/mentions-legales', priority: 1, name: 'app_mentions')]
     public function mentions(): Response
     {
         return $this->render('home/mentions.html.twig');

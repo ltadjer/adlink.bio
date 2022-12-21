@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container card">
+    <div class="title">
+        <h1>Créer un compte</h1>
+        <a href="{{ path('app_home') }}" class="btn-title">Retour<i class="fa-solid fa-chevron-right"></i></a>
+    </div>
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.pseudo, {'label':false}) }}
+    {{ form_row(registrationForm.slug, {'label':false}) }}
+    {{ form_row(registrationForm.email, {'label':false}) }}
+    {{ form_row(registrationForm.plainPassword, {'label':false}) }}
+    {{ form_row(registrationForm.agreeTerms) }}
+
+    <button type="submit" class="btn">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

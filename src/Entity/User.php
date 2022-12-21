@@ -3,29 +3,40 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    private $email;
+
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
+
+    #[ORM\Column(type: 'string')]
+    private $password;
+
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $pseudo = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[ORM\Column(length: 255)]
+    
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $font;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Code::class)]
     private Collection $codes;
@@ -33,8 +44,6 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class)]
     private Collection $links;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $font;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: SectionCompany::class, cascade: ['persist', 'remove'])]
     private $sectionCompany;
@@ -55,8 +64,7 @@ class User
     private $network;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $createAt;
-
+    private $createdAt;
 
     public function __construct()
     {
@@ -68,18 +76,6 @@ class User
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -94,7 +90,47 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -102,6 +138,38 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -114,66 +182,6 @@ class User
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Code>
-     */
-    public function getCodes(): Collection
-    {
-        return $this->codes;
-    }
-
-    public function addCode(Code $code): self
-    {
-        if (!$this->codes->contains($code)) {
-            $this->codes->add($code);
-            $code->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCode(Code $code): self
-    {
-        if ($this->codes->removeElement($code)) {
-            // set the owning side to null (unless already changed)
-            if ($code->getUser() === $this) {
-                $code->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Link>
-     */
-    public function getLinks(): Collection
-    {
-        return $this->links;
-    }
-
-    public function addLink(Link $link): self
-    {
-        if (!$this->links->contains($link)) {
-            $this->links->add($link);
-            $link->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLink(Link $link): self
-    {
-        if ($this->links->removeElement($link)) {
-            // set the owning side to null (unless already changed)
-            if ($link->getUser() === $this) {
-                $link->setUser(null);
-            }
-        }
 
         return $this;
     }
@@ -305,15 +313,10 @@ class User
         return $this->network;
     }
 
-    public function setNetwork(?Network $network): self
+    public function setNetwork(Network $network): self
     {
-        // unset the owning side of the relation if necessary
-        if ($network === null && $this->network !== null) {
-            $this->network->setUser(null);
-        }
-
         // set the owning side of the relation if necessary
-        if ($network !== null && $network->getUser() !== $this) {
+        if ($network->getUser() !== $this) {
             $network->setUser($this);
         }
 
@@ -322,15 +325,21 @@ class User
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
-    public function setCreateAt(\DateTimeImmutable $createAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 }

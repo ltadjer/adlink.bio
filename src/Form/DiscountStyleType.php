@@ -20,7 +20,7 @@ class DiscountStyleType extends AbstractType
         ->add('textCodeColor', ColorType::class,['label' => 'Couleur du texte du code :', 'required' => false])
         ->add('bgCardColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan de la card :', 'required' => false])
         ->add('textCardColor', ColorType::class,['label' => 'Couleur du texte de la description :', 'required' => false])
-        ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
+        ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
 
         ;
     }

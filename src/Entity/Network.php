@@ -32,6 +32,7 @@ class Network
     private $tikTok;
 
     #[ORM\OneToOne(inversedBy: 'network', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
     private $user;
 
     public function getId(): ?int
@@ -116,7 +117,7 @@ class Network
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
