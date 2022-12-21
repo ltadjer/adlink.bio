@@ -15,11 +15,11 @@ class DiscountStyleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
-        ->add('bgCodeColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan du code :', 'required' => false])
-        ->add('textCodeColor', ColorType::class,['label' => 'Couleur du texte du code :', 'required' => false])
-        ->add('bgCardColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan de la card :', 'required' => false])
-        ->add('textCardColor', ColorType::class,['label' => 'Couleur du texte de la description :', 'required' => false])
+        ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false, 'attr' => ['class' => 'form-color']])
+        ->add('bgCodeColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan du code :', 'required' => false, 'attr' => ['class' => 'form-color']])
+        ->add('textCodeColor', ColorType::class,['label' => 'Couleur du texte du code :', 'required' => false, 'attr' => ['class' => 'form-color']])
+        ->add('bgCardColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan de la card :', 'required' => false, 'attr' => ['class' => 'form-color']])
+        ->add('textCardColor', ColorType::class,['label' => 'Couleur du texte de la description :', 'required' => false, 'attr' => ['class' => 'form-color']])
         ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
 
         ;

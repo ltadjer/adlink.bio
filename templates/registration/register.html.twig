@@ -8,6 +8,10 @@
         <h1>Créer un compte</h1>
         <a href="{{ path('app_home') }}" class="btn-title">Retour<i class="fa-solid fa-chevron-right"></i></a>
     </div>
+    <div class="method-account">
+        <p>Déjà inscrit ?</p>
+        <a href="{{ path('app_login') }}">Se connecter</a>
+    </div>
     {{ form_start(registrationForm) }}
     {{ form_row(registrationForm.pseudo, {'label':false}) }}
     {{ form_row(registrationForm.slug, {'label':false}) }}

@@ -6,7 +6,8 @@
 <div class="container">
     <div class="title">
         <h1>Dashboard</h1>
-        <a href="{{ path('app_logout') }}" class="btn-title">Déconnexion<i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        <a href="{{ path('app_logout') }}" class="btn-title">Déconnexion<i
+                class="fa-solid fa-arrow-right-from-bracket"></i></a>
     </div>
     <a href="{{ path('app_landing', {slug: user.slug}) }}" class="btn-admin">Voir le site</a>
     <div class="font-form">
@@ -29,8 +30,8 @@
             </div>
             <div class="section-content">
                 <div class="form-user">
-                    {{ form_start(formCompany)}}
                     <h3>Information de la section</h3>
+                    {{ form_start(formCompany)}}
                     {{ form_row(formCompany.logoFile)}}
                     {{ form_row(formCompany.title)}}
                     {{ form_row(formCompany.baseline)}}
@@ -60,8 +61,8 @@
             </div>
             <div class="section-content">
                 <div class="form-user">
-                    {{ form_start(formVideo)}}
                     <h3>Information de la section</h3>
+                    {{ form_start(formVideo)}}
                     {{ form_row(formVideo.link)}}
                     {{ form_row(formVideo.altVideo)}}
                     <h3>Style de la section</h3>
@@ -89,9 +90,20 @@
             <div class="section-content">
                 <div class="form-user">
                     <h3>Information de la section</h3>
-                    {{ form(formCode) }}
-                    <h3>Style de la section</h3>
-                    {{ form(formDiscountStyle) }}
+                    {{ form_start(formCode)}}
+                    {{ form_row(formCode.code)}}
+                    {{ form_row(formCode.description)}}
+                    {{ form_row(formCode.save) }}
+                    {{ form_end(formCode) }}
+                    <h3 class="title-style">Style de la section</h3>
+                    {{ form_start(formDiscountStyle)}}
+                    {{ form_row(formDiscountStyle.bgColor)}}
+                    {{ form_row(formDiscountStyle.bgCodeColor)}}
+                    {{ form_row(formDiscountStyle.textCodeColor)}}
+                    {{ form_row(formDiscountStyle.bgCardColor)}}
+                    {{ form_row(formDiscountStyle.textCardColor)}}
+                    {{ form_row(formDiscountStyle.save) }}
+                    {{ form_end(formDiscountStyle) }}
                 </div>
                 <div class="render">
                     <h3>Rendu sur le site</h3>
@@ -113,9 +125,18 @@
             <div class="section-content">
                 <div class="form-user">
                     <h3>Information de la section</h3>
-                    {{ form(formLink) }}
-                    <h3>Style de la section</h3>
-                    {{ form(formLinkStyle) }}
+                    {{ form_start(formLink)}}
+                    {{ form_row(formLink.name)}}
+                    {{ form_row(formLink.link)}}
+                    {{ form_row(formLink.save) }}
+                    {{ form_end(formLink) }}
+                    <h3 class="title-style">Style de la section</h3>
+                    {{ form_start(formLinkStyle)}}
+                    {{ form_row(formLinkStyle.bgColor)}}
+                    {{ form_row(formLinkStyle.bgBtnColor)}}
+                    {{ form_row(formLinkStyle.textBtnColor)}}
+                    {{ form_row(formLinkStyle.save) }}
+                    {{ form_end(formLinkStyle) }}
                 </div>
                 <div class="render">
                     <h3>Rendu sur le site</h3>
@@ -137,9 +158,21 @@
             <div class="section-content">
                 <div class="form-user">
                     <h3>Information de la section</h3>
-                    {{ form(formNetwork) }}
-                    <h3>Style de la section</h3>
-                    {{ form(formNetworkStyle) }}
+                    {{ form_start(formNetwork)}}
+                    {{ form_row(formNetwork.instagram)}}
+                    {{ form_row(formNetwork.facebook)}}
+                    {{ form_row(formNetwork.youtube)}}
+                    {{ form_row(formNetwork.gitHub)}}
+                    {{ form_row(formNetwork.twitter)}}
+                    {{ form_row(formNetwork.tikTok)}}
+                    {{ form_row(formNetwork.save) }}
+                    {{ form_end(formNetwork) }}
+                    <h3 class="title-style">Style de la section</h3>
+                    {{ form_start(formNetworkStyle)}}
+                    {{ form_row(formNetworkStyle.bgColor)}}
+                    {{ form_row(formNetworkStyle.iconColor)}}
+                    {{ form_row(formNetworkStyle.save) }}
+                    {{ form_end(formNetworkStyle) }}
                 </div>
                 <div class="render">
                     <h3>Rendu sur le site</h3>
@@ -148,7 +181,9 @@
             </div>
         </section>
         <section class="section-account">
-            <h3>Information du compte</h3>
+            <div class="section-title">
+                <h2>Information du compte</h2>
+            </div>
             <div class="section-content">
             </div>
         </section>

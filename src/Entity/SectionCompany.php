@@ -23,9 +23,6 @@ class SectionCompany
     #[Vich\UploadableField(mapping: 'logo_user', fileNameProperty: 'logo')]
     private ?File $logoFile = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $UpdatedAt;
-
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -57,10 +54,6 @@ class SectionCompany
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if (null !== $logoFile) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTimeImmutable('now');
-        }
     }
 
     public function getLogoFile(): ?File

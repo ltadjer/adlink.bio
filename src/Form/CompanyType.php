@@ -17,12 +17,12 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('logoFile', VichImageType::class, ['label' => 'logo :', 'required' => false, 'download_label' => false])
-            ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :', 'required' => false])
-            ->add('baseline', TextareaType::class, ['label' => 'Baseline :', 'required' => false])
-            ->add('bgColor', ColorType::class ,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
-            ->add('titleColor', ColorType::class ,['label' => 'Couleur du titre :', 'required' => false])
-            ->add('baselineColor', ColorType::class ,['label' => 'Couleur de la baseline :', 'required' => false])
+            ->add('logoFile', VichImageType::class, ['label' => 'logo :', 'required' => false, 'download_label' => false, 'attr' => ['class' => 'form-img', 'placeholder' => 'Parcourir...']])
+            ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :', 'required' => false, 'attr' => ['class' => 'form-input', 'placeholder' => 'Ex : Adlink.bio']])
+            ->add('baseline', TextareaType::class, ['label' => 'Baseline :', 'required' => false, 'attr' => ['class' => 'form-input', 'placeholder' => 'Slogan']])
+            ->add('bgColor', ColorType::class ,['label' => 'Couleur de l\'arrière-plan :', 'required' => false, 'attr' => ['class' => 'form-color']])
+            ->add('titleColor', ColorType::class ,['label' => 'Couleur du titre :', 'required' => false, 'attr' => ['class' => 'form-color']])
+            ->add('baselineColor', ColorType::class ,['label' => 'Couleur de la baseline :', 'required' => false, 'attr' => ['class' => 'form-color']])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }

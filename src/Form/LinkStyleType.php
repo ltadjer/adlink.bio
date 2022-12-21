@@ -15,9 +15,9 @@ class LinkStyleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false])
-        ->add('bgBtnColor', ColorType::class,['label' => 'Couleur des boutons :', 'required' => false])
-        ->add('textBtnColor', ColorType::class,['label' => 'Couleur du texte des boutons :', 'required' => false])
+        ->add('bgColor', ColorType::class,['label' => 'Couleur de l\'arrière-plan :', 'required' => false, 'attr' => ['class' => 'form-color']])
+        ->add('bgBtnColor', ColorType::class,['label' => 'Couleur des boutons :', 'required' => false, 'attr' => ['class' => 'form-color']])
+        ->add('textBtnColor', ColorType::class,['label' => 'Couleur du texte des boutons :', 'required' => false, 'attr' => ['class' => 'form-color']])
         ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }

@@ -14,8 +14,8 @@ class CodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('code', TextType::class, ['label' => 'Code promo :'])
-            ->add('description', TextType::class, ['label' => 'Description du code :'])
+            ->add('code', TextType::class, ['label' => 'Code promo :', 'attr' => ['class' => 'form-input', 'placeholder' => 'Ex : BONJOUR']])
+            ->add('description', TextType::class, ['label' => 'Description du code :', 'attr' => ['class' => 'form-input', 'placeholder' => 'Ex : -10% sur...']])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }
