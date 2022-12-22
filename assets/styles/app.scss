@@ -15,11 +15,14 @@ $white :#fff;
 a {
     color: $secondaryColor;
 }
-html, body {
+
+html,
+body {
     height: 100%;
     padding: 0;
     margin: 0;
-  }
+}
+
 body {
     background-color: #ffffff;
     font-family: 'Poppins', sans-serif;
@@ -38,9 +41,11 @@ body {
             height: 3.5rem;
         }
     }
+
     main {
         margin-bottom: 3rem;
     }
+
     footer {
         background: $mainColor;
         padding: 1.5rem 7rem;
@@ -108,6 +113,7 @@ body {
             .form-login {
                 width: 55%;
             }
+
             form {
                 display: flex;
                 flex-direction: column;
@@ -137,13 +143,16 @@ body {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
+
                     a {
                         color: $mainColor;
+
                         &:hover {
                             text-decoration: underline;
                         }
                     }
                 }
+
                 .btn-account {
                     background-color: $mainColor;
                     color: $white;
@@ -154,6 +163,7 @@ body {
                     font-size: 0.8rem;
                     border: $mainColor solid 2px;
                     width: 100%;
+
                     &:hover {
                         color: $mainColor;
                         background-color: $white;
@@ -508,6 +518,78 @@ body {
                 }
             }
         }
+
+        //CHECKBOX
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+
+                &:checked {
+                    ~ {
+                        .checkmark {
+                            background-color: white;
+                            border: solid 3px blue;
+
+                            &:after {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                input {
+                    ~ {
+                        .checkmark {
+                            background-color: #ccc;
+                        }
+                    }
+                }
+            }
+
+            .checkmark {
+                &:after {
+                    left: 9px;
+                    top: 5px;
+                    width: 5px;
+                    height: 10px;
+                    border: solid blue;
+                    border-width: 0 3px 3px 0;
+                    -webkit-transform: rotate(45deg);
+                    -ms-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                }
+            }
+        }
+
+        .checkmark {
+            position: absolute;
+            border-radius: 5px;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+
+            &:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+        }
+
 
     }
 }
