@@ -263,24 +263,23 @@ body {
 
                     .visible {
                         font-family: 'Roboto';
+                        display: flex;
                         position: absolute;
                         right: 0;
 
                         /* Rounded sliders */
                         .toggle {
                             position: relative;
-                            display: inline-block;
+                            display: flex;
                             width: 45px;
                             height: 25px;
 
                             .toggle-off {
                                 position: absolute;
-                                left: 0;
                             }
 
                             .toggle-on {
                                 position: absolute;
-                                left: 0;
                             }
 
                             input {
