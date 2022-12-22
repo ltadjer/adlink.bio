@@ -105,6 +105,9 @@ body {
             padding: 20px 40px 40px 40px;
             width: 100%;
 
+            .form-login {
+                width: 55%;
+            }
             form {
                 display: flex;
                 flex-direction: column;
@@ -139,6 +142,21 @@ body {
                         &:hover {
                             text-decoration: underline;
                         }
+                    }
+                }
+                .btn-account {
+                    background-color: $mainColor;
+                    color: $white;
+                    padding: 6px 18px;
+                    cursor: pointer;
+                    font-family: 'Roboto';
+                    border-radius: 25px;
+                    font-size: 0.8rem;
+                    border: $mainColor solid 2px;
+                    width: 100%;
+                    &:hover {
+                        color: $mainColor;
+                        background-color: $white;
                     }
                 }
             }
