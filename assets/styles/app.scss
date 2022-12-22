@@ -15,11 +15,16 @@ $white :#fff;
 a {
     color: $secondaryColor;
 }
-
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
 body {
     background-color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 
     header {
         box-shadow: #00000029 0 0 15px;
@@ -33,16 +38,15 @@ body {
             height: 3.5rem;
         }
     }
-
+    main {
+        margin-bottom: 3rem;
+    }
     footer {
         background: $mainColor;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
         padding: 1.5rem 7rem;
         display: flex;
         justify-content: space-between;
-        margin-top: 2.5rem;
+        margin-top: auto;
         font-size: 14px;
 
         .copyright {
@@ -130,6 +134,12 @@ body {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
+                    a {
+                        color: $mainColor;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
                 }
             }
         }
@@ -170,8 +180,9 @@ body {
                 cursor: pointer;
                 font-family: 'Roboto';
                 border-radius: 25px;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 border: $mainColor solid 2px;
+
                 &:hover {
                     background-color: $white;
                     color: $mainColor;
@@ -200,6 +211,7 @@ body {
                     color: $mainColor;
                 }
             }
+
             .btn-title:hover {
                 transform: translateX(10px);
             }
@@ -311,7 +323,7 @@ body {
                                 content: "";
                                 height: 19px;
                                 width: 19px;
-                                left: 1px;
+                                left: 2px;
                                 bottom: 1px;
                                 background-color: $mainColor;
                                 -webkit-transition: .4s;
@@ -326,9 +338,9 @@ body {
                                         background-color: $white;
 
                                         &:before {
-                                            -webkit-transform: translateX(19.5px);
-                                            -ms-transform: translateX(19.5px);
-                                            transform: translateX(19.5px);
+                                            -webkit-transform: translateX(19px);
+                                            -ms-transform: translateX(19px);
+                                            transform: translateX(19px);
                                         }
                                     }
                                 }
@@ -469,7 +481,7 @@ body {
 
                         img {
                             display: block;
-                            height: auto;
+                            height: 100%;
                             width: 100%;
                             border-radius: 15px;
                             object-fit: cover;
