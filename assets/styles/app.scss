@@ -125,6 +125,7 @@ body {
                         color: $mainColor;
                     }
                 }
+
                 .checkbox {
                     display: flex;
                     align-items: center;
@@ -159,8 +160,23 @@ body {
         .btns-home {
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 8rem;
             margin-bottom: 6rem;
+
+            .btn-home {
+                background-color: $mainColor;
+                color: $white;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-family: 'Roboto';
+                border-radius: 25px;
+                font-size: 1.2rem;
+                border: $mainColor solid 2px;
+                &:hover {
+                    background-color: $white;
+                    color: $mainColor;
+                }
+            }
         }
 
         .title {
@@ -178,10 +194,14 @@ body {
                 position: absolute;
                 right: 0;
                 gap: 10px;
+                transition: .4s;
 
                 svg {
                     color: $mainColor;
                 }
+            }
+            .btn-title:hover {
+                transform: translateX(10px);
             }
         }
 
@@ -249,6 +269,8 @@ body {
                         display: flex;
                         position: absolute;
                         right: 0;
+                        align-items: center;
+                        gap: 1rem;
 
                         /* Rounded sliders */
                         .toggle {
@@ -430,7 +452,7 @@ body {
 
                             div>button {
                                 width: auto !important;
-                                margin: 0 auto;
+                                margin: 0.5rem auto 0 auto;
                             }
                         }
                     }
