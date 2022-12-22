@@ -38,9 +38,6 @@ body {
             height: 3.5rem;
         }
     }
-    main {
-        margin-bottom: 3rem;
-    }
     footer {
         background: $mainColor;
         padding: 1.5rem 7rem;
@@ -83,12 +80,6 @@ body {
             background-color: $white;
             color: $mainColor;
         }
-    }
-
-    h1 {
-        font-family: 'Audiowide';
-        text-align: center;
-        font-size: 2.7rem;
     }
 
     .container {
@@ -160,6 +151,11 @@ body {
                     }
                 }
             }
+        }
+        h1 {
+            font-family: 'Audiowide';
+            text-align: center;
+            font-size: 2.7rem;
         }
 
         .btn-save {
@@ -509,5 +505,22 @@ body {
             }
         }
 
+    }
+    .container-landing {        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10% 20%;
+            width: 100%;
+            & .company {
+            }
+        }
     }
 }

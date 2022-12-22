@@ -3,7 +3,7 @@
 {% block title %}Landing page {{parent()}}{% endblock %}
 
 {% block body %}
-    <div class="container" style= "font-family: {{user.font}}, Sans serif;">
+    <div class="container-landing" style= "font-family: {{user.font}}, Sans serif;">
         <section class="compagny" style="background-color:{{ user.sectionCompany.bgColor }}">
             <img src="{{ vich_uploader_asset(user.sectionCompany, 'logoFile') }}">
             <h1 style="color:{{ user.sectionCompany.titleColor }}">{{user.sectionCompany.title}}</h1>
