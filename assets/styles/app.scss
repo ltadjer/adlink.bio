@@ -266,6 +266,8 @@ body {
                         display: flex;
                         position: absolute;
                         right: 0;
+                        align-items: center;
+                        gap: 1rem;
 
                         /* Rounded sliders */
                         .toggle {
@@ -447,7 +449,7 @@ body {
 
                             div>button {
                                 width: auto !important;
-                                margin: 0 auto;
+                                margin: 0.5rem auto 0 auto;
                             }
                         }
                     }
