@@ -18,12 +18,9 @@
     {{ form_row(registrationForm.email, {'label':false}) }}
     {{ form_row(registrationForm.plainPassword, {'label':false}) }}
     <div class="checkbox">
-        <label class="container">
-            En cochant cette case j'accepte <a href="{{ path('app_confidentialite') }}">les conditions d'utilisation</a>
-            <input type="checkbox" checked="checked">
-            {{ form_widget(registrationForm.agreeTerms) }}
-            <span class="checkmark"></span>
-        </label>
+        {{ form_widget(registrationForm.agreeTerms) }}
+        <label>en cochant cette case j'accepte <a href="{{ path('app_confidentialite') }}">les conditions
+                d'utilisation</a></label>
     </div>
     <div>
         <button type="submit" class="btn-account">S'inscrire</button>
