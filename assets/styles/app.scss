@@ -36,6 +36,9 @@ body {
 
     footer {
         background: $mainColor;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
         padding: 1.5rem 7rem;
         display: flex;
         justify-content: space-between;
