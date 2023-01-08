@@ -20,6 +20,12 @@ use App\Form\CompanyType;
 use App\Form\DiscountStyleType;
 use App\Form\LinkStyleType;
 use App\Form\NetworkStyleType;
+use App\Repository\NetworkRepository;
+use App\Repository\SectionCompanyRepository;
+use App\Repository\SectionDiscountRepository;
+use App\Repository\SectionLinkRepository;
+use App\Repository\SectionNetworkRepository;
+use App\Repository\SectionVideoRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,22 +51,35 @@ class DashboardController extends AbstractController
 
 
     #[Route('/{slug}/admin', name: 'app_adminUser')]
-    public function adminUser( UserRepository $userRepository, $slug, Request $request, ManagerRegistry $doctrine): Response
+    public function adminUser( UserRepository $userRepository, SectionCompanyRepository $companyRepository, SectionVideoRepository $videoRepository, SectionDiscountRepository $discountRepository, SectionLinkRepository $sectionLinkRepository, SectionNetworkRepository $sectionNetworkRepository, NetworkRepository $networkRepository,  $slug, Request $request, ManagerRegistry $doctrine): Response
     {
-
-        $company = new SectionCompany();
-        $video = new SectionVideo();
-        $code = new Code();
-        $discountStyle = new SectionDiscount();
-        $link = new Link();
-        $network = new Network();
-        $linkStyle = new SectionLink();
-        $networkStyle = new SectionNetwork();
 
         
         $user = $userRepository->findOneBy(['slug' => $slug]);
 
         $font = $userRepository->find($user);
+
+        $idUser = $user -> getId();
+        // $company = new SectionCompany();
+
+        // Recherche par l'Id de user et non Id de la section
+        $company = $companyRepository->findOneBy(['user' => $idUser]);
+        
+        // $video = new SectionVideo();
+        $video = $videoRepository->findOneBy(['user' => $idUser]);
+
+        $code = new Code();
+        // $discountStyle = new SectionDiscount();
+        $discountStyle = $discountRepository->findOneBy(['user' => $idUser]);
+        
+        $link = new Link();
+        // $linkStyle = new SectionLink();
+        $linkStyle = $sectionLinkRepository->findOneBy(['user' => $idUser]);
+
+        $network = $networkRepository->findOneBy(['user' => $idUser]);
+        $networkStyle = $sectionNetworkRepository->findOneBy(['user' => $idUser]);
+        // $network = new Network();
+        // $networkStyle = new SectionNetwork();
 
 
         $formFont = $this->createForm(FontType::class, $font);
@@ -99,9 +118,9 @@ class DashboardController extends AbstractController
 
         // Envoie du formulaire COMPANY INFO + STYLE
 		if ($formCompany->isSubmitted()) {
-            $company->setUser($user);
+            // $company->setUser($user);
 			$em = $doctrine->getManager();
-			$em->persist($company);
+			// $em->persist($company);
 			$em->flush();
             // if ($formCompany['logo']== null){
             //     $formCompany['logo']== 'test';
@@ -128,9 +147,9 @@ class DashboardController extends AbstractController
 
         // Envoie du formulaire DISCOUNT STYLE
         if ($formDiscountStyle->isSubmitted()) {
-            $discountStyle->setUser($user);
+            // $discountStyle->setUser($user);
 			$em = $doctrine->getManager();
-			$em->persist($discountStyle);
+			// $em->persist($discountStyle);
 			$em->flush();
 		}
 
@@ -144,25 +163,25 @@ class DashboardController extends AbstractController
 
         // Envoie du formulaire LINK STYLE
         if ($formLinkStyle->isSubmitted()) {
-            $linkStyle->setUser($user);
+            // $linkStyle->setUser($user);
 			$em = $doctrine->getManager();
-			$em->persist($linkStyle);
+			// $em->persist($linkStyle);
 			$em->flush();
 		}
 
-        // Envoie du formulaire NETWORK INFO
+        // // Envoie du formulaire NETWORK INFO
         if ($formNetwork->isSubmitted()) {
-            $network->setUser($user);
+            // $network->setUser($user);
 			$em = $doctrine->getManager();
-			$em->persist($network);
+			// $em->persist($network);
 			$em->flush();
 		}
 
-        // Envoie du formulaire NETWORK STYLE
+        // // Envoie du formulaire NETWORK STYLE
         if ($formNetworkStyle->isSubmitted()) {
-            $networkStyle->setUser($user);
+            // $networkStyle->setUser($user);
 			$em = $doctrine->getManager();
-			$em->persist($networkStyle);
+			// $em->persist($networkStyle);
 			$em->flush();
 		}
 

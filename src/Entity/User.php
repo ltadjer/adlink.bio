@@ -69,7 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->codes = new ArrayCollection();
-        $this->networks = new ArrayCollection();
         $this->links = new ArrayCollection();
     }
 

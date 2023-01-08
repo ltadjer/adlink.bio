@@ -17,7 +17,7 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('logoFile', VichImageType::class, ['label' => 'logo :', 'required' => false, 'download_label' => false, 'attr' => ['class' => 'form-img', 'placeholder' => 'Parcourir...']])
+            ->add('logoFile', VichImageType::class, ['label' => 'logo :', 'required' => false,'allow_delete' => false, 'download_label' => false, 'attr' => ['class' => 'form-img', 'placeholder' => 'Parcourir...']])
             ->add('title', TextType::class, ['label' => 'Nom de l\'entreprise :', 'required' => false, 'attr' => ['class' => 'form-input', 'placeholder' => 'Ex : Adlink.bio']])
             ->add('baseline', TextareaType::class, ['label' => 'Baseline :', 'required' => false, 'attr' => ['class' => 'form-input', 'placeholder' => 'Slogan']])
             ->add('bgColor', ColorType::class ,['label' => 'Couleur de l\'arrière-plan :', 'required' => false, 'attr' => ['class' => 'form-color']])

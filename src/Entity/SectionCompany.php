@@ -31,7 +31,7 @@ class SectionCompany
 
     #[ORM\Column(length: 255)]
     private ?string $bgColor = null;
-
+    
     #[ORM\Column(length: 255)]
     private ?string $titleColor = null;
 
@@ -40,7 +40,6 @@ class SectionCompany
 
     #[ORM\OneToOne(inversedBy: 'sectionCompany', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
-
 
     public function getId(): ?int
     {
