@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SectionCompanyRepository::class)]
 #[Vich\Uploadable]
+
 class SectionCompany
 {
     #[ORM\Id]
@@ -22,6 +23,9 @@ class SectionCompany
  
     #[Vich\UploadableField(mapping: 'logo_user', fileNameProperty: 'logo')]
     private ?File $logoFile = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -53,6 +57,11 @@ class SectionCompany
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
+        if (null !== $logoFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     public function getLogoFile(): ?File
@@ -64,7 +73,7 @@ class SectionCompany
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
 
