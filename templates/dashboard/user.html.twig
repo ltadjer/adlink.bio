@@ -185,6 +185,15 @@
                 <h2>Information du compte</h2>
             </div>
             <div class="section-content">
+                <div class="form-user">
+                    {{ form_start(formUser)}}
+                    {{ form_row(formUser.email)}}
+                    {{ form_row(formUser.pseudo)}}
+                    {{ form_row(formUser.plainPassword)}}
+                    {{ form_row(formUser.slug)}}
+                    {{ form_row(formUser.save) }}
+                    {{ form_end(formUser)}}
+                </div>
                 <a href="{{ path('app_deleteUser', {id: user.id}) }}" class="delete btn">Supprimer le compte</a>
             </div>
         </section>
