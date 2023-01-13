@@ -4,46 +4,56 @@
 
 {% block body %}
     <div class="container-landing" style= "font-family: {{user.font}}, Sans serif;">
-        <section class="company" style="background-color:{{ user.sectionCompany.bgColor }}">
-            <img src="{{ vich_uploader_asset(user.sectionCompany, 'logoFile') }}">
-            <h1 style="color:{{ user.sectionCompany.titleColor }}">{{user.sectionCompany.title}}</h1>
-            <p style="color:{{ user.sectionCompany.baselineColor }}">{{user.sectionCompany.baseline}}</p>
-        </section>
-        <section class="video" style="background-color:{{user.sectionVideo.bgColor}}">
-            <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="fullscreen"></iframe>
-        </section>
-        <section class="discount" style="background-color:{{user.sectionDiscount.bgColor}}">
-            {% for code in user.codes %}
-                <div class="code" style="background-color:{{ user.sectionDiscount.bgCardColor }}">
-                    <span class="btn-landing" style="background-color:{{ user.sectionDiscount.bgCodeColor }}; color:{{ user.sectionDiscount.textCodeColor }}">{{code.code}}</span>
-                    <p style="color:{{ user.sectionDiscount.textCardColor }}">{{code.description}}</p>
-                </div>
-            {% endfor %}
-        </section>
-        <section class="link" style="background-color:{{user.sectionLink.bgColor}}">
-            {% for link in user.links %}
-                <a target="_blank" href="{{link.link}}" class="btn-landing" style="background-color:{{ user.sectionLink.bgBtnColor }}; color:{{ user.sectionLink.textBtnColor }}">{{link.name}}</a>
-            {% endfor %}
-        </section>
-        <section class="network" style="background-color:{{user.sectionNetwork.bgColor}}">
-            {% if user.network.instagram %}
-                <a target="_blank" href="https://www.instagram.com/{{user.network.instagram}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-instagram" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
-            {% endif %}
-            {% if user.network.facebook %}
-                <a target="_blank" href="https://www.facebook.com/{{user.network.facebook}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-facebook-f" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
-            {% endif %}
-            {% if user.network.youtube %}
-                <a target="_blank" href="https://www.youtube.com/{{user.network.youtube}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-youtube" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
-            {% endif %}
-            {% if user.network.gitHub %}
-                <a target="_blank" href="https://github.com/{{user.network.gitHub}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-github" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
-            {% endif %}
-            {% if user.network.twitter %}
-                <a target="_blank" href="https://twitter.com/{{user.network.twitter}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-twitter" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
-            {% endif %}
-            {% if user.network.tikTok %}
-                <a target="_blank" href="https://www.tiktok.com/{{user.network.tikTok}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-tiktok" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>                                              
-            {% endif %}
-        </section>
+        {% if user.sectionCompany.visible %}
+            <section class="company" style="background-color:{{ user.sectionCompany.bgColor }}">
+                <img src="{{ vich_uploader_asset(user.sectionCompany, 'logoFile') }}">
+                <h1 style="color:{{ user.sectionCompany.titleColor }}">{{user.sectionCompany.title}}</h1>
+                <p style="color:{{ user.sectionCompany.baselineColor }}">{{user.sectionCompany.baseline}}</p>
+            </section>
+        {% endif %}
+        {% if user.sectionVideo.visible %}
+            <section class="video" style="background-color:{{user.sectionVideo.bgColor}}">
+                <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="fullscreen"></iframe>
+            </section>
+        {% endif %}
+        {% if user.sectionDiscount.visible %}
+            <section class="discount" style="background-color:{{user.sectionDiscount.bgColor}}">
+                {% for code in user.codes %}
+                    <div class="code" style="background-color:{{ user.sectionDiscount.bgCardColor }}">
+                        <span class="btn-landing" style="background-color:{{ user.sectionDiscount.bgCodeColor }}; color:{{ user.sectionDiscount.textCodeColor }}">{{code.code}}</span>
+                        <p style="color:{{ user.sectionDiscount.textCardColor }}">{{code.description}}</p>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
+        {% if user.sectionLink.visible %}
+            <section class="link" style="background-color:{{user.sectionLink.bgColor}}">
+                {% for link in user.links %}
+                    <a target="_blank" href="{{link.link}}" class="btn-landing" style="background-color:{{ user.sectionLink.bgBtnColor }}; color:{{ user.sectionLink.textBtnColor }}">{{link.name}}</a>
+                {% endfor %}
+            </section>
+        {% endif %}
+        {% if user.sectionNetwork.visible %}
+            <section class="network" style="background-color:{{user.sectionNetwork.bgColor}}">
+                {% if user.network.instagram %}
+                    <a target="_blank" href="https://www.instagram.com/{{user.network.instagram}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-instagram" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
+                {% endif %}
+                {% if user.network.facebook %}
+                    <a target="_blank" href="https://www.facebook.com/{{user.network.facebook}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-facebook-f" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
+                {% endif %}
+                {% if user.network.youtube %}
+                    <a target="_blank" href="https://www.youtube.com/{{user.network.youtube}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-youtube" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
+                {% endif %}
+                {% if user.network.gitHub %}
+                    <a target="_blank" href="https://github.com/{{user.network.gitHub}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-github" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
+                {% endif %}
+                {% if user.network.twitter %}
+                    <a target="_blank" href="https://twitter.com/{{user.network.twitter}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-twitter" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>
+                {% endif %}
+                {% if user.network.tikTok %}
+                    <a target="_blank" href="https://www.tiktok.com/{{user.network.tikTok}}" class="rs" style="background-color:{{ user.sectionNetwork.iconColor }}"><i class="fa-brands fa-tiktok" style="color:{{ user.sectionNetwork.bgColor }}"></i></a>                                              
+                {% endif %}
+            </section>
+        {% endif %}
     </div>
 {% endblock %}

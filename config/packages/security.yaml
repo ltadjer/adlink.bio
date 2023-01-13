@@ -28,6 +28,7 @@ security:
                 # "app_login" is the name of the route created previously
                 login_path: app_login
                 check_path: app_login
+                default_target_path: app_adminUser
                 enable_csrf: true 
         secured_area:
             # ...
@@ -35,8 +36,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/^[a-z0-9]+(?:-[a-z0-9]+)*$/admin, roles: ROLE_USER }
+        - { path: ^/admin-admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_USER }
 
 when@test:
     security:

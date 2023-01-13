@@ -4,12 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Code;
 use App\Entity\Link;
-use App\Entity\Network;
-use App\Entity\SectionCompany;
-use App\Entity\SectionDiscount;
-use App\Entity\SectionLink;
-use App\Entity\SectionNetwork;
-use App\Entity\SectionVideo;
 use App\Entity\User;
 use App\Form\CodeType;
 use App\Form\FontType;
@@ -35,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/ADLadmin', name: 'app_admin')]
     public function admin(UserRepository $userRepository): Response
     {
         $users = $userRepository->findAll();
@@ -50,39 +44,32 @@ class DashboardController extends AbstractController
 
 
 
-    #[Route('/{slug}/admin', name: 'app_adminUser')]
-    public function adminUser( UserRepository $userRepository, SectionCompanyRepository $companyRepository, SectionVideoRepository $videoRepository, SectionDiscountRepository $discountRepository, SectionLinkRepository $sectionLinkRepository, SectionNetworkRepository $sectionNetworkRepository, NetworkRepository $networkRepository,  $slug, Request $request, ManagerRegistry $doctrine): Response
+    #[Route('/admin', name: 'app_adminUser')]
+    public function adminUser( UserRepository $user, SectionCompanyRepository $companyRepository, SectionVideoRepository $videoRepository, SectionDiscountRepository $discountRepository, SectionLinkRepository $sectionLinkRepository, SectionNetworkRepository $sectionNetworkRepository, NetworkRepository $networkRepository, Request $request, ManagerRegistry $doctrine): Response
     {
 
         
-        $user = $userRepository->findOneBy(['slug' => $slug]);
-
-        $font = $userRepository->find($user);
-
-        $idUser = $user -> getId();
-        // $company = new SectionCompany();
+        // $user = $userRepository->findOneBy(['slug' => $slug]);
+        $user = $this->getUser();
 
         // Recherche par l'Id de user et non Id de la section
-        $company = $companyRepository->findOneBy(['user' => $idUser]);
+        $company = $companyRepository->findOneBy(['user' => $user]);
         
-        // $video = new SectionVideo();
-        $video = $videoRepository->findOneBy(['user' => $idUser]);
+        $video = $videoRepository->findOneBy(['user' => $user]);
 
         $code = new Code();
-        // $discountStyle = new SectionDiscount();
-        $discountStyle = $discountRepository->findOneBy(['user' => $idUser]);
+
+        $discountStyle = $discountRepository->findOneBy(['user' => $user]);
         
         $link = new Link();
-        // $linkStyle = new SectionLink();
-        $linkStyle = $sectionLinkRepository->findOneBy(['user' => $idUser]);
+        
+        $linkStyle = $sectionLinkRepository->findOneBy(['user' => $user]);
 
-        $network = $networkRepository->findOneBy(['user' => $idUser]);
-        $networkStyle = $sectionNetworkRepository->findOneBy(['user' => $idUser]);
-        // $network = new Network();
-        // $networkStyle = new SectionNetwork();
+        $network = $networkRepository->findOneBy(['user' => $user]);
+        $networkStyle = $sectionNetworkRepository->findOneBy(['user' => $user]);
 
 
-        $formFont = $this->createForm(FontType::class, $font);
+        $formFont = $this->createForm(FontType::class, $user);
 
         $formCompany = $this->createForm(CompanyType::class, $company);
 
@@ -112,15 +99,13 @@ class DashboardController extends AbstractController
         // Envoie du formulaire TYPO
         if ($formFont->isSubmitted()) {
 			$em = $doctrine->getManager();
-			$em->persist($font);
+			$em->persist($user);
 			$em->flush();
 		}
 
         // Envoie du formulaire COMPANY INFO + STYLE
 		if ($formCompany->isSubmitted()) {
-            // $company->setUser($user);
 			$em = $doctrine->getManager();
-			// $em->persist($company);
 			$em->flush();
             // if ($formCompany['logo']== null){
             //     $formCompany['logo']== 'test';
@@ -147,9 +132,7 @@ class DashboardController extends AbstractController
 
         // Envoie du formulaire DISCOUNT STYLE
         if ($formDiscountStyle->isSubmitted()) {
-            // $discountStyle->setUser($user);
 			$em = $doctrine->getManager();
-			// $em->persist($discountStyle);
 			$em->flush();
 		}
 
@@ -163,25 +146,19 @@ class DashboardController extends AbstractController
 
         // Envoie du formulaire LINK STYLE
         if ($formLinkStyle->isSubmitted()) {
-            // $linkStyle->setUser($user);
 			$em = $doctrine->getManager();
-			// $em->persist($linkStyle);
 			$em->flush();
 		}
 
         // // Envoie du formulaire NETWORK INFO
         if ($formNetwork->isSubmitted()) {
-            // $network->setUser($user);
 			$em = $doctrine->getManager();
-			// $em->persist($network);
 			$em->flush();
 		}
 
         // // Envoie du formulaire NETWORK STYLE
         if ($formNetworkStyle->isSubmitted()) {
-            // $networkStyle->setUser($user);
 			$em = $doctrine->getManager();
-			// $em->persist($networkStyle);
 			$em->flush();
 		}
 
@@ -207,4 +184,25 @@ class DashboardController extends AbstractController
             'formNetworkStyle' => $formNetworkStyle->createView(),
         ]);
     }
+
+    #[Route('/{id}/delete', name: 'app_deleteUser')]
+    public function deleteUser($id, UserRepository $user, ManagerRegistry $doctrine) {
+	$em = $doctrine->getManager();
+	$idUser = $user->find($id);// récupération de l'article correspondant à $id en bdd
+	$em->remove($idUser);
+	$em->flush();
+
+    return $this->redirectToRoute('app_home');
+    }
+
+    #[Route('/{id}/deleteAdmin', name: 'app_deleteUserAdmin')]
+    public function deleteUserAdmin($id, UserRepository $user, ManagerRegistry $doctrine) {
+	$em = $doctrine->getManager();
+	$idUser = $user->find($id);// récupération de l'article correspondant à $id en bdd
+	$em->remove($idUser);
+	$em->flush();
+
+    return $this->redirectToRoute('app_admin');
+    }
+
 }

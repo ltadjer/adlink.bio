@@ -45,6 +45,9 @@ class SectionCompany
     #[ORM\OneToOne(inversedBy: 'sectionCompany', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
+    #[ORM\Column(type: 'boolean')]
+    private $visible;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -148,6 +151,18 @@ class SectionCompany
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
 
         return $this;
     }
