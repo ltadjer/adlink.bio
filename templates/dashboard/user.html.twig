@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-    <div class="title">
+    <div class="title" id='title'>
         <h1>Dashboard</h1>
         <a href="{{ path('app_logout') }}" class="btn-title">Déconnexion<i
                 class="fa-solid fa-arrow-right-from-bracket"></i></a>
@@ -17,15 +17,14 @@
         {{ form_end(formFont) }}
     </div>
     <div class="sections">
-        <section class="section-company">
+        <section class="section-company" id="company">
             <div class="section-title">
                 <h2>Section présentation</h2>
                 <div class="visible">
-                    <span class="toggle-off">Visible : Non</span>
-                    <label class="toggle">
-                        <input type="checkbox"><span class="slider round"></span>
-                    </label>
-                    <span class="toggle-on">Oui</span>
+                    {{ form_start(formVisibleCompany)}}
+                    {{ form_row(formVisibleCompany.visible)}}
+                    {{ form_row(formVisibleCompany.save) }}
+                    {{ form_end(formVisibleCompany) }}
                 </div>
             </div>
             <div class="section-content">
@@ -48,15 +47,14 @@
                 </div>
             </div>
         </section>
-        <section class="section-video">
+        <section class="section-video" id="video">
             <div class="section-title">
                 <h2>Section vidéo</h2>
                 <div class="visible">
-                    <span class="toggle-off">Visible : Non</span>
-                    <label class="toggle">
-                        <input type="checkbox"><span class="slider round"></span>
-                    </label>
-                    <span class="toggle-on">Oui</span>
+                    {{ form_start(formVisibleVideo)}}
+                    {{ form_row(formVisibleVideo.visible)}}
+                    {{ form_row(formVisibleVideo.save) }}
+                    {{ form_end(formVisibleVideo) }}
                 </div>
             </div>
             <div class="section-content">
@@ -76,25 +74,42 @@
                 </div>
             </div>
         </section>
-        <section class="section-discount">
+        <section class="section-discount" id="discount">
             <div class="section-title">
                 <h2>Section codes promo</h2>
                 <div class="visible">
-                    <span class="toggle-off">Visible : Non</span>
-                    <label class="toggle">
-                        <input type="checkbox"><span class="slider round"></span>
-                    </label>
-                    <span class="toggle-on">Oui</span>
+                    {{ form_start(formVisibleDiscount)}}
+                    {{ form_row(formVisibleDiscount.visible)}}
+                    {{ form_row(formVisibleDiscount.save) }}
+                    {{ form_end(formVisibleDiscount) }}
                 </div>
             </div>
             <div class="section-content">
                 <div class="form-user">
                     <h3>Information de la section</h3>
+                    <table>
+                        <tr>
+                            <th>Code promo</th>
+                            <th>Description</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        {% for code in codes %}
+                            <tr>
+                                <td>{{code.code}}</td>
+                                <td>{{code.description}}</td>
+                                <td>
+                                    <a href="{{ path('app_deleteCode', {id: code.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <h4>Ajouter un code promo</h4>
                     {{ form_start(formCode)}}
                     {{ form_row(formCode.code)}}
                     {{ form_row(formCode.description)}}
                     {{ form_row(formCode.save) }}
                     {{ form_end(formCode) }}
+
                     <h3 class="title-style">Style de la section</h3>
                     {{ form_start(formDiscountStyle)}}
                     {{ form_row(formDiscountStyle.bgColor)}}
@@ -111,20 +126,36 @@
                 </div>
             </div>
         </section>
-        <section class="section-link">
+        <section class="section-link" id="link">
             <div class="section-title">
                 <h2>Section liens utiles</h2>
                 <div class="visible">
-                    <span class="toggle-off">Visible : Non</span>
-                    <label class="toggle">
-                        <input type="checkbox"><span class="slider round"></span>
-                    </label>
-                    <span class="toggle-on">Oui</span>
+                    {{ form_start(formVisibleLink)}}
+                    {{ form_row(formVisibleLink.visible)}}
+                    {{ form_row(formVisibleLink.save) }}
+                    {{ form_end(formVisibleLink) }}
                 </div>
             </div>
             <div class="section-content">
                 <div class="form-user">
                     <h3>Information de la section</h3>
+                    <table>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Lien</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        {% for link in links %}
+                            <tr>
+                                <td>{{link.name}}</td>
+                                <td>{{link.link}}</td>
+                                <td>
+                                    <a href="{{ path('app_deleteLink', {id: link.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <h4>Ajouter un lien</h4>
                     {{ form_start(formLink)}}
                     {{ form_row(formLink.name)}}
                     {{ form_row(formLink.link)}}
@@ -144,15 +175,14 @@
                 </div>
             </div>
         </section>
-        <section class="section-rs">
+        <section class="section-rs" id="network">
             <div class="section-title">
                 <h2>Section réseaux sociaux</h2>
                 <div class="visible">
-                    <span class="toggle-off">Visible : Non</span>
-                    <label class="toggle">
-                        <input type="checkbox"><span class="slider round"></span>
-                    </label>
-                    <span class="toggle-on">Oui</span>
+                    {{ form_start(formVisibleNetwork)}}
+                    {{ form_row(formVisibleNetwork.visible)}}
+                    {{ form_row(formVisibleNetwork.save) }}
+                    {{ form_end(formVisibleNetwork) }}
                 </div>
             </div>
             <div class="section-content">
@@ -180,7 +210,7 @@
                 </div>
             </div>
         </section>
-        <section class="section-account">
+        <section class="section-account" id="user">
             <div class="section-title">
                 <h2>Information du compte</h2>
             </div>

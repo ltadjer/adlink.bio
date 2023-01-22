@@ -44,7 +44,7 @@ class DeleteUserController extends AbstractController
             $em->remove($removeCode);  
         }
     }
-    if (isset($removeLink)) {
+    if (isset($removeLinks)) {
         foreach ($removeLinks as $removeLink){
             $em->remove($removeLink);  
         }
@@ -82,9 +82,9 @@ class DeleteUserController extends AbstractController
             $em->remove($removeCode);  
         }
     }
-    if (isset($removeLink)) {
+    if (isset($removeLinks)) {
         foreach ($removeLinks as $removeLink){
-            $em->remove($removeLink);  
+            $em->remove($removeLink);
         }
     }
 

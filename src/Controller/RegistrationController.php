@@ -38,7 +38,6 @@ class RegistrationController extends AbstractController
             $user->setFont("Poppins");
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
 
             $em = $doctrine->getManager();
