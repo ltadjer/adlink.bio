@@ -57,145 +57,12 @@ class DashboardController extends AbstractController
     {
 
         
-    
+        // USER EDIT
         $user = $this->getUser();
 
-        // Recherche par l'Id de user et non Id de la section
-        $company = $companyRepository->findOneBy(['user' => $user]);
-        
-        $video = $videoRepository->findOneBy(['user' => $user]);
-
-        $codes = $codeRepository->findBy(['user' => $user]);
-        $code = new Code();
-
-        $discountStyle = $discountRepository->findOneBy(['user' => $user]);
-        
-        $links = $linkRepository->findBy(['user' => $user]);
-        $link = new Link();
-        
-        $linkStyle = $sectionLinkRepository->findOneBy(['user' => $user]);
-
-        $network = $networkRepository->findOneBy(['user' => $user]);
-        $networkStyle = $sectionNetworkRepository->findOneBy(['user' => $user]);
-
-        $formFont = $this->createForm(FontType::class, $user);
-
-        $formCompany = $this->createForm(CompanyType::class, $company);
-
-        $formVideo = $this->createForm(VideoType::class, $video);
-
-        $formCode = $this->createForm(CodeType::class, $code);
-
-        $formDiscountStyle = $this->createForm(DiscountStyleType::class, $discountStyle);
-
-        $formLink = $this->createForm(LinkType::class, $link);
-        $formLinkStyle = $this->createForm(LinkStyleType::class, $linkStyle);
-
-        $formNetwork = $this->createForm(NetworkType::class, $network);
-        $formNetworkStyle = $this->createForm(NetworkStyleType::class, $networkStyle);
-
         $formUser = $this->createForm(UserType::class, $user);
-
-        $formVisibleCompany = $this->createForm(VisibleCompanyType::class, $company);
-        $formVisibleVideo = $this->createForm(VisibleVideoType::class, $video);
-        $formVisibleDiscount = $this->createForm(VisibleDiscountType::class, $discountStyle);
-        $formVisibleLink = $this->createForm(VisibleLinkType::class, $linkStyle);
-        $formVisibleNetwork = $this->createForm(VisibleNetworkType::class, $networkStyle);
-
-
-        $formFont->handleRequest($request);
-        $formCompany->handleRequest($request);
-        $formVideo->handleRequest($request);
-        $formCode->handleRequest($request);
-        $formDiscountStyle->handleRequest($request);
-        $formLink->handleRequest($request);
-        $formLinkStyle->handleRequest($request);
-        $formNetwork->handleRequest($request);
-        $formNetworkStyle->handleRequest($request);
         $formUser->handleRequest($request);
-
-        $formVisibleCompany->handleRequest($request);
-        $formVisibleVideo->handleRequest($request);
-        $formVisibleDiscount->handleRequest($request);
-        $formVisibleLink->handleRequest($request);
-        $formVisibleNetwork->handleRequest($request);
-
-        
-        // Envoie du formulaire TYPO
-        if ($formFont->isSubmitted()) {
-			$em = $doctrine->getManager();
-			$em->persist($user);
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'title']);
-		}
-
-        // Envoie du formulaire COMPANY INFO + STYLE
-		if ($formCompany->isSubmitted() && $formCompany->isValid()) {
-			$em = $doctrine->getManager();
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'company']);
-		}
-
-        // Envoie du formulaire VIDEO INFO + STYLE
-        if ($formVideo->isSubmitted() && $formVideo->isValid()) {
-            $video->setUser($user);
-			$em = $doctrine->getManager();
-			$em->persist($video);
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'video']);
-
-		}
-
-        // Envoie du formulaire CODE INFO NOUVEAU
-        if ($formCode->isSubmitted() && $formCode->isValid()) {
-            $code->setUser($user);
-			$em = $doctrine->getManager();
-			$em->persist($code);
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
-		}
-
-        // Envoie du formulaire DISCOUNT STYLE
-        if ($formDiscountStyle->isSubmitted() && $formDiscountStyle->isValid()) {
-			$em = $doctrine->getManager();
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
-		}
-
-        // Envoie du formulaire LINK INFO NOUVEAU
-        if ($formLink->isSubmitted() && $formLink->isValid()) {
-            $link->setUser($user);
-			$em = $doctrine->getManager();
-			$em->persist($link);
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser');
-		}
-
-        // Envoie du formulaire LINK STYLE
-        if ($formLinkStyle->isSubmitted() && $formLinkStyle->isValid()) {
-			$em = $doctrine->getManager();
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'link']);
-
-		}
-
-        // // Envoie du formulaire NETWORK INFO
-        if ($formNetwork->isSubmitted() && $formNetwork->isValid()) {
-			$em = $doctrine->getManager();
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'network']);
-
-		}
-
-        // // Envoie du formulaire NETWORK STYLE
-        if ($formNetworkStyle->isSubmitted() && $formNetwork->isValid()) {
-			$em = $doctrine->getManager();
-			$em->flush();
-            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'network']);
-
-		}
-
-        // // Envoie du formulaire USER
+        // Envoie du formulaire USER
         if ($formUser->isSubmitted() && $formUser->isValid()) {
             $em = $doctrine->getManager();
             $newPassword = $formUser->get('plainPassword')->getData();
@@ -205,36 +72,178 @@ class DashboardController extends AbstractController
             $user->setPassword( $hashOfNewPassword );
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'user']);
-
 		}
 
-        // VISIBLE
+
+        // FONT EDIT
+        $formFont = $this->createForm(FontType::class, $user);
+        $formFont->handleRequest($request);
+        // Envoie du formulaire TYPO
+        if ($formFont->isSubmitted()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'title']);
+		}
+
+
+        // COMPANY EDIT
+        // Recherche par l'Id de user et non Id de la section
+        $company = $companyRepository->findOneBy(['user' => $user]);
+        $formCompany = $this->createForm(CompanyType::class, $company);
+        $formCompany->handleRequest($request);
+        // Envoie du formulaire COMPANY INFO + STYLE
+		if ($formCompany->isSubmitted() && $formCompany->isValid()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'company']);
+		}
+
+
+        // VIDEO EDIT
+        // Recherche par l'Id de user et non Id de la section
+        $video = $videoRepository->findOneBy(['user' => $user]);
+        $formVideo = $this->createForm(VideoType::class, $video);
+        $formVideo->handleRequest($request);
+        // Envoie du formulaire VIDEO INFO + STYLE
+        if ($formVideo->isSubmitted() && $formVideo->isValid()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'video']);
+		}
+
+
+        // CODES TABLEAU
+        // Recherche par l'Id de user et non Id de la section
+        $codes = $codeRepository->findBy(['user' => $user]);
+
+
+        // CODE AJOUT NOUVEAU
+        $code = new Code();
+        $formCode = $this->createForm(CodeType::class, $code);
+        $formCode->handleRequest($request);
+        // Envoie du formulaire CODE INFO NOUVEAU
+        if ($formCode->isSubmitted() && $formCode->isValid()) {
+            $code->setUser($user);
+			$em = $doctrine->getManager();
+			$em->persist($code);
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
+		}
+
+
+        // DISCOUNT EDIT
+        // Recherche par l'Id de user et non Id de la section
+        $discountStyle = $discountRepository->findOneBy(['user' => $user]);
+        $formDiscountStyle = $this->createForm(DiscountStyleType::class, $discountStyle);
+        $formDiscountStyle->handleRequest($request);
+        // Envoie du formulaire DISCOUNT STYLE
+        if ($formDiscountStyle->isSubmitted() && $formDiscountStyle->isValid()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
+		}
+        
+
+        // LIENS TABLEAU
+        // Recherche par l'Id de user et non Id de la section
+        $links = $linkRepository->findBy(['user' => $user]);
+
+
+        // LIEN AJOUT NOUVEAU
+        $link = new Link();
+        $formLink = $this->createForm(LinkType::class, $link);
+        $formLink->handleRequest($request);
+        // Envoie du formulaire LINK INFO NOUVEAU
+        if ($formLink->isSubmitted() && $formLink->isValid()) {
+            $link->setUser($user);
+			$em = $doctrine->getManager();
+			$em->persist($link);
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser');
+		}
+        
+
+        // LIEN EDIT
+        // Recherche par l'Id de user et non Id de la section
+        $linkStyle = $sectionLinkRepository->findOneBy(['user' => $user]);
+        $formLinkStyle = $this->createForm(LinkStyleType::class, $linkStyle);
+        $formLinkStyle->handleRequest($request);
+        // Envoie du formulaire LINK STYLE
+        if ($formLinkStyle->isSubmitted() && $formLinkStyle->isValid()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'link']);
+		}
+
+
+        // NETWORK EDIT
+        // Recherche par l'Id de user et non Id de la section
+        $network = $networkRepository->findOneBy(['user' => $user]);
+        $formNetwork = $this->createForm(NetworkType::class, $network);
+        $formNetwork->handleRequest($request);
+        // // Envoie du formulaire NETWORK INFO
+        if ($formNetwork->isSubmitted() && $formNetwork->isValid()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'network']);
+		}
+        // Recherche par l'Id de user et non Id de la section
+        $networkStyle = $sectionNetworkRepository->findOneBy(['user' => $user]);
+        $formNetworkStyle = $this->createForm(NetworkStyleType::class, $networkStyle);
+        $formNetworkStyle->handleRequest($request);
+        // // Envoie du formulaire NETWORK STYLE
+        if ($formNetworkStyle->isSubmitted() && $formNetworkStyle->isValid()) {
+			$em = $doctrine->getManager();
+			$em->flush();
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'network']);
+		}
+    
+
+        // VISIBLE COMPANY
+        $formVisibleCompany = $this->createForm(VisibleCompanyType::class, $company);
+        $formVisibleCompany->handleRequest($request);
         if ($formVisibleCompany->isSubmitted()) {
 			$em = $doctrine->getManager();
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'company']);
 		}
+
+        // VISIBLE VIDEO
+        $formVisibleVideo = $this->createForm(VisibleVideoType::class, $video);
+        $formVisibleVideo->handleRequest($request);
         if ($formVisibleVideo->isSubmitted()) {
 			$em = $doctrine->getManager();
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'video']);
 		}
+
+        // VISIBLE DISCOUNT
+        $formVisibleDiscount = $this->createForm(VisibleDiscountType::class, $discountStyle);
+        $formVisibleDiscount->handleRequest($request);
         if ($formVisibleDiscount->isSubmitted()) {
 			$em = $doctrine->getManager();
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
 		}
+        
+        // VISIBLE LINK
+        $formVisibleLink = $this->createForm(VisibleLinkType::class, $linkStyle);
+        $formVisibleLink->handleRequest($request);
         if ($formVisibleLink->isSubmitted()) {
 			$em = $doctrine->getManager();
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'link']);
 		}
+        
+        // VISIBLE NETWORK
+        $formVisibleNetwork = $this->createForm(VisibleNetworkType::class, $networkStyle);
+        $formVisibleNetwork->handleRequest($request);
         if ($formVisibleNetwork->isSubmitted()) {
 			$em = $doctrine->getManager();
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'network']);
 		}
-
+        
         
         return $this->render('dashboard/user.html.twig', [
             'user' => $user,
@@ -245,7 +254,6 @@ class DashboardController extends AbstractController
 
             'formVideo' => $formVideo->createView(),
 
-
             'codes' => $codes,
             'formCode' => $formCode->createView(),
 
@@ -254,7 +262,6 @@ class DashboardController extends AbstractController
             'formLink' => $formLink->createView(),
             'links' => $links,
             'formLinkStyle' => $formLinkStyle->createView(),
-
 
             'formNetwork' => $formNetwork->createView(),
             'formNetworkStyle' => $formNetworkStyle->createView(),
@@ -281,7 +288,7 @@ class DashboardController extends AbstractController
 
 	$em->flush();
 
-    return $this->redirectToRoute('app_adminUser');
+    return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
     }
 
     #[Route('/{id}/deleteLink', name: 'app_deleteLink')]
@@ -295,6 +302,6 @@ class DashboardController extends AbstractController
 
 	$em->flush();
 
-    return $this->redirectToRoute('app_adminUser');
+    return $this->redirectToRoute('app_adminUser', ['_fragment' => 'link']);
     }
 }

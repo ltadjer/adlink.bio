@@ -23,10 +23,11 @@ class RegistrationController extends AbstractController
     #[Route('/inscription', priority: 1, name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
     {
+
+        // CREATION USER
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -39,7 +40,8 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-
+            
+            // CREATION COMPANY
             $em = $doctrine->getManager();
             $sectionCompany = new SectionCompany();
             $sectionCompany->setLogo("logo.svg");
@@ -53,6 +55,7 @@ class RegistrationController extends AbstractController
             $em->persist($sectionCompany);
             $em->flush();
 
+            // CREATION VIDEO
             $em = $doctrine->getManager();
             $sectionVideo = new SectionVideo();
             $sectionVideo->setLink("https://www.youtube.com/watch?v=KDhLtvfFJ4k");
@@ -63,6 +66,7 @@ class RegistrationController extends AbstractController
             $em->persist($sectionVideo);
             $em->flush();
 
+            // CREATION DISCOUNT
             $em = $doctrine->getManager();
             $sectionDiscount = new SectionDiscount();
             $sectionDiscount->setBgColor("#FFFFFF");
@@ -75,6 +79,7 @@ class RegistrationController extends AbstractController
             $em->persist($sectionDiscount);
             $em->flush();
 
+            // CREATION LINK
             $em = $doctrine->getManager();
             $sectionLink = new SectionLink();
             $sectionLink->setBgColor("#000000");
@@ -85,6 +90,7 @@ class RegistrationController extends AbstractController
             $em->persist($sectionLink);
             $em->flush();
 
+            // CREATION NETWORK STYLE
             $em = $doctrine->getManager();
             $sectionNetwork = new SectionNetwork();
             $sectionNetwork->setBgColor("#FFFFFF");
@@ -94,6 +100,7 @@ class RegistrationController extends AbstractController
             $em->persist($sectionNetwork);
             $em->flush();
 
+            // CREATION NETWORK
             $em = $doctrine->getManager();
             $network = new Network();
             $network->setUser($user);

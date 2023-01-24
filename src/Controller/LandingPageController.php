@@ -13,6 +13,7 @@ class LandingPageController extends AbstractController
     public function index(UserRepository $user, $slug): Response
     {
         $slugUser = $user->findOneBy(['slug' => $slug]);
+        
         return $this->render('landing_page/index.html.twig', [
             "user" => $slugUser
         ]);

@@ -11,14 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, ['label' => 'Nouvelle adresse email :','attr' => ['placeholder' => 'Ex : Adlink@adl.fr', 'class' => 'form-input'], 'required' => false])
+            ->add('email', EmailType::class, ['label' => 'Nouvelle adresse email :','attr' => ['placeholder' => 'Ex : bonjour@adlink.bio', 'class' => 'form-input'], 'required' => false])
             ->add('pseudo', TextType::class, ['label' => 'Nouveau nom :','attr' => ['placeholder' => 'Ex : Adlink', 'class' => 'form-input'], 'required' => false])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -28,9 +27,6 @@ class UserType extends AbstractType
                 'required' => false,
                 'attr' => ['autocomplete' => 'new-password', 'placeholder' => 'Nouveau mot de passe', 'class' => 'form-input'],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrer un nouveau mot de passe',
-                    ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Le mot de passe doit contenir au minimum {{ limit }} caractères',
