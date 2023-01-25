@@ -18,7 +18,7 @@ class VisibleDiscountType extends AbstractType
             'choices' => [
                 'Afficher' => true,
                 'Cacher' => false,
-            ], 'attr' => ['class' => 'visible-choice']])
+            ], 'attr' => ['class' => 'visible-choice font-select']])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn-save']])
         ;
     }

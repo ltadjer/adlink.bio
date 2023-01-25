@@ -304,6 +304,29 @@ body {
             gap: 5rem;
             width: 100%;
 
+            .section-account {
+                .section-content {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 2rem;
+
+                    a {
+                        font-weight: 500;
+                        color: $secondaryColor;
+                        cursor: pointer;
+                        border-radius: 25px;
+                        font-size: 0.9rem;
+
+                        &:hover {
+                            color: $mainColor;
+                            text-decoration: underline;
+                            text-underline-offset: 0.2rem;
+
+                        }
+                    }
+                }
+            }
+
             section {
                 box-shadow: #00000040 0 0 30px;
                 border-radius: 20px;
@@ -330,75 +353,26 @@ body {
                         align-items: center;
                         gap: 1rem;
 
-                        /* Rounded sliders */
-                        .toggle {
-                            position: relative;
+                        form {
                             display: flex;
-                            width: 45px;
-                            height: 25px;
+                            align-items: center;
+                            gap: 1rem;
 
-                            .toggle-off {
-                                position: absolute;
+                            div:first-of-type {
+                                display: flex;
+                                gap: 1rem;
                             }
-
-                            .toggle-on {
-                                position: absolute;
-                            }
-
-                            input {
-                                opacity: 0;
-                                width: 0;
-                                height: 0;
+                            .btn-save {
+                                font-size: 0.6rem;
                             }
                         }
-
-                        .slider {
-                            position: absolute;
-                            cursor: pointer;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            background-color: $white;
-                            border: $secondaryColor solid 2px;
-                            -webkit-transition: .4s;
-                            transition: .4s;
-
-                            &:before {
-                                position: absolute;
-                                content: "";
-                                height: 19px;
-                                width: 19px;
-                                left: 2px;
-                                bottom: 1px;
-                                background-color: $mainColor;
-                                -webkit-transition: .4s;
-                                transition: .4s;
-                            }
-                        }
-
-                        input {
-                            &:checked {
-                                + {
-                                    .slider {
-                                        background-color: $white;
-
-                                        &:before {
-                                            -webkit-transform: translateX(19px);
-                                            -ms-transform: translateX(19px);
-                                            transform: translateX(19px);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .slider.round {
-                            border-radius: 35px;
-
-                            &:before {
-                                border-radius: 50%;
-                            }
+                        select {
+                            font-family: 'Roboto';
+                            color: $mainColor;
+                            border: 1px solid $secondaryColor;
+                            border-radius: 8px;
+                            padding: 0 2px;
+                            outline: none;
                         }
                     }
                 }
@@ -537,6 +511,7 @@ body {
             }
         }
 
+        // Landing page
     }
     .container-landing {        
         display: flex;

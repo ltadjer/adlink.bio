@@ -43,7 +43,6 @@ class DashboardController extends AbstractController
         $users = $userRepository->findAll();
         $NbUsers = count($users);
 
-        // Faire fonction delete pour un user
 
         return $this->render('dashboard/admin.html.twig', [
             'users' => $users,
@@ -65,11 +64,13 @@ class DashboardController extends AbstractController
         // Envoie du formulaire USER
         if ($formUser->isSubmitted() && $formUser->isValid()) {
             $em = $doctrine->getManager();
-            $newPassword = $formUser->get('plainPassword')->getData();
+            if(($formUser->get('plainPassword')->getData()) ==! NULL) {
+                $newPassword = $formUser->get('plainPassword')->getData();
 
-            $hashOfNewPassword = $userPasswordHasher->hashPassword($user, $newPassword);
- 
-            $user->setPassword( $hashOfNewPassword );
+                $hashOfNewPassword = $userPasswordHasher->hashPassword($user, $newPassword);
+     
+                $user->setPassword( $hashOfNewPassword );
+            }
 			$em->flush();
             return $this->redirectToRoute('app_adminUser', ['_fragment' => 'user']);
 		}
@@ -279,13 +280,10 @@ class DashboardController extends AbstractController
 
     #[Route('/{id}/deleteCode', name: 'app_deleteCode')]
     public function deleteCode($id, CodeRepository $code, ManagerRegistry $doctrine) {
+
 	$em = $doctrine->getManager();
-	
     $removeCode = $code->find($id);
-
-
 	$em->remove($removeCode);
-
 	$em->flush();
 
     return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
@@ -293,13 +291,9 @@ class DashboardController extends AbstractController
 
     #[Route('/{id}/deleteLink', name: 'app_deleteLink')]
     public function deleteLink($id, LinkRepository $link, ManagerRegistry $doctrine) {
-	$em = $doctrine->getManager();
-	
+	$em = $doctrine->getManager();	
     $removeLink = $link->find($id);
-
-
 	$em->remove($removeLink);
-
 	$em->flush();
 
     return $this->redirectToRoute('app_adminUser', ['_fragment' => 'link']);
