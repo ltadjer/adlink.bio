@@ -160,7 +160,7 @@ class DashboardController extends AbstractController
 			$em = $doctrine->getManager();
 			$em->persist($link);
 			$em->flush();
-            return $this->redirectToRoute('app_adminUser');
+            return $this->redirectToRoute('app_adminUser', ['_fragment' => 'discount']);
 		}
         
 
@@ -291,11 +291,33 @@ class DashboardController extends AbstractController
 
     #[Route('/{id}/deleteLink', name: 'app_deleteLink')]
     public function deleteLink($id, LinkRepository $link, ManagerRegistry $doctrine) {
-	$em = $doctrine->getManager();	
+	$em = $doctrine->getManager();
     $removeLink = $link->find($id);
 	$em->remove($removeLink);
 	$em->flush();
 
     return $this->redirectToRoute('app_adminUser', ['_fragment' => 'link']);
+    }
+
+    #[Route('/{name}/{id}/deleteNetwork', name: 'app_deleteNetwork')]
+    public function deleteNetwork($name, $id, NetworkRepository $networkRepository, ManagerRegistry $doctrine) {
+	$em = $doctrine->getManager();
+    $network = $networkRepository->findOneBy(['user' => $id]);
+    if($name=='instagram') {
+        $network->setInstagram("");
+    }elseif($name=='facebook') {
+        $network->setFacebook("");
+    }elseif($name=='youtube')  {
+        $network->setYoutube("");
+    }elseif($name=='gitHub')  {
+        $network->setGitHub("");
+    }elseif($name=='twitter')  {
+        $network->setTwitter("");
+    }elseif($name=='TikTok')  {
+        $network->setTikTok("");
+    }
+	$em->flush();
+
+    return $this->redirectToRoute('app_adminUser', ['_fragment' => 'network']);
     }
 }

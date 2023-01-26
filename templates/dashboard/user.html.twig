@@ -88,20 +88,24 @@
                 <div class="form-user">
                     <h3>Information de la section</h3>
                     <table>
-                        <tr>
-                            <th>Code promo</th>
-                            <th>Description</th>
-                            <th>Supprimer</th>
-                        </tr>
-                        {% for code in codes %}
+                        <thead>
                             <tr>
-                                <td>{{code.code}}</td>
-                                <td>{{code.description}}</td>
-                                <td>
-                                    <a href="{{ path('app_deleteCode', {id: code.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
-                                </td>
+                                <th>Code promo</th>
+                                <th>Description</th>
+                                <th></th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for code in codes %}
+                                <tr>
+                                    <td>{{code.code}}</td>
+                                    <td>{{code.description}}</td>
+                                    <td>
+                                        <a href="{{ path('app_deleteCode', {id: code.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                     <h4>Ajouter un code promo</h4>
                     {{ form_start(formCode)}}
@@ -140,12 +144,15 @@
                 <div class="form-user">
                     <h3>Information de la section</h3>
                     <table>
-                        <tr>
+                        <thead>
+                            <tr>
                             <th>Nom</th>
                             <th>Lien</th>
-                            <th>Supprimer</th>
+                            <th></th>
                         </tr>
-                        {% for link in links %}
+                        </thead>
+                        <tbody>
+                            {% for link in links %}
                             <tr>
                                 <td>{{link.name}}</td>
                                 <td>{{link.link}}</td>
@@ -153,7 +160,8 @@
                                     <a href="{{ path('app_deleteLink', {id: link.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
                                 </td>
                             </tr>
-                        {% endfor %}
+                            {% endfor %}
+                        </tbody>
                     </table>
                     <h4>Ajouter un lien</h4>
                     {{ form_start(formLink)}}
@@ -189,12 +197,31 @@
                 <div class="form-user">
                     <h3>Information de la section</h3>
                     {{ form_start(formNetwork)}}
-                    {{ form_row(formNetwork.instagram)}}
-                    {{ form_row(formNetwork.facebook)}}
-                    {{ form_row(formNetwork.youtube)}}
-                    {{ form_row(formNetwork.gitHub)}}
-                    {{ form_row(formNetwork.twitter)}}
-                    {{ form_row(formNetwork.tikTok)}}
+                    <div class="network-form">
+                        {{ form_row(formNetwork.instagram)}}
+                        <a class="delete-network" href="{{ path('app_deleteNetwork', {name: "instagram", id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                    <div class="network-form">
+                        {{ form_row(formNetwork.facebook)}}
+                        <a class="delete-network" href="{{ path('app_deleteNetwork', {name: "facebook", id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                    <div class="network-form">
+                        {{ form_row(formNetwork.youtube)}}
+                        <a class="delete-network" href="{{ path('app_deleteNetwork', {name: "youtube", id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                    <div class="network-form">
+                        {{ form_row(formNetwork.gitHub)}}
+                        <a class="delete-network" href="{{ path('app_deleteNetwork', {name: "gitHub", id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+
+                    </div>
+                    <div class="network-form">
+                        {{ form_row(formNetwork.twitter)}}
+                        <a class="delete-network" href="{{ path('app_deleteNetwork', {name: "twitter", id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                    <div class="network-form">
+                        {{ form_row(formNetwork.tikTok)}}
+                        <a class="delete-network" href="{{ path('app_deleteNetwork', {name: "tikTok", id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
                     {{ form_row(formNetwork.save) }}
                     {{ form_end(formNetwork) }}
                     <h3 class="title-style">Style de la section</h3>

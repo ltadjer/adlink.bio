@@ -16,13 +16,13 @@ a {
     color: $secondaryColor;
 }
 
+
 html,
 body {
     height: 100%;
     padding: 0;
     margin: 0;
 }
-
 body {
     background-color: #ffffff;
     font-family: 'Poppins', sans-serif;
@@ -35,10 +35,10 @@ body {
         display: flex;
         justify-content: center;
         padding: 0.8rem 0;
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
 
         .logo {
-            height: 3.5rem;
+            height: 5rem;
         }
     }
     footer {
@@ -263,6 +263,32 @@ body {
             }
         }
 
+        .table {
+            table {
+                width: 100%;
+                margin-top: 1rem;
+                th {
+                    text-align: left;
+                    font-weight: 500;
+                    padding: 0 0.5rem;
+
+                }
+                tr {
+                    padding: 0.7rem 0;
+                }
+                td {
+                    font-size: 0.9rem;
+                    padding: 0.3rem 0.5rem;
+
+
+                    a {
+                        color: $mainColor;
+                        padding: 0 0.5rem;
+                    }
+                }
+            }
+        }
+
         .method-account {
             display: flex;
             align-items: center;
@@ -293,6 +319,7 @@ body {
                         border-radius: 8px;
                         padding: 0 2px;
                         outline: none;
+                        cursor: pointer;
                     }
                 }
             }
@@ -304,6 +331,21 @@ body {
             gap: 5rem;
             width: 100%;
 
+            .section-rs {
+                .section-content {
+                    .form-user {
+                        form {
+                            .network-form {
+                                justify-content: center;
+                                a {
+                                    color: $mainColor;
+                                    width: 10%;
+                                }
+                            }
+                        }
+                    }
+                    }
+            }
             .section-account {
                 .section-content {
                     flex-direction: column;
@@ -373,6 +415,7 @@ body {
                             border-radius: 8px;
                             padding: 0 2px;
                             outline: none;
+                            cursor: pointer;
                         }
                     }
                 }
@@ -397,6 +440,33 @@ body {
                             margin-bottom: 1rem;
                         }
 
+                        table {
+                            width: 80%;
+                            th {
+                                text-align: left;
+                                font-weight: 500;
+                            }
+                            tr {
+                                padding: 0.7rem 0;
+                            }
+                            td {
+                                font-size: 0.9rem;
+                                a {
+                                    color: $mainColor;
+                                }
+                            }
+                            tbody {
+                                tr {
+                                    border-top: 1px $secondaryColor solid;
+                                }
+                            }
+                        }
+
+                        h4 {
+                            margin: 1rem 0;
+                            font-weight: 500;
+                        }
+
                         .title-style {
                             margin: 1.5rem 0;
                         }
@@ -418,7 +488,7 @@ body {
                                 justify-content: space-between;
                                 align-items: center;
 
-                                .form-img,
+                                .form-img,  
                                 .form-input,
                                 .form-color {
                                     font-family: 'Roboto';

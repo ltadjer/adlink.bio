@@ -13,7 +13,7 @@
         {% endif %}
         {% if user.sectionVideo.visible %}
             <section class="video" style="background-color:{{user.sectionVideo.bgColor}}">
-                <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="fullscreen"></iframe>
+                <iframe src="{{ user.sectionVideo.link|replace({'watch?v=': 'embed/'}) }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
             </section>
         {% endif %}
         {% if user.sectionDiscount.visible %}
