@@ -16,17 +16,17 @@
                         <th>Nom client</th>
                         <th>Slug</th>
                         <th>Date de création</th>
-                        <th>email</th>
+                        <th>Email</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user in users %}
                         <tr>
-                            <td>{{user.pseudo}}</td>
-                            <td>{{user.slug}}</td>
-                            <td>{{ user.createdAt|date('d/m/Y') }}</td>
-                            <td>{{user.email}}</td>
+                            <td data-label="Nom client">{{user.pseudo}}</td>
+                            <td data-label="Slug">{{user.slug}}</td>
+                            <td data-label="Date de création">{{ user.createdAt|date('d/m/Y') }}</td>
+                            <td data-label="Email">{{user.email}}</td>
                             <td>
                                 <a href="{{ path('app_landing', {slug: user.slug}) }}"><i class="fa-regular fa-eye"></i></a>
                                 <a href="{{ path('app_deleteUserAdmin', {id: user.id}) }}"><i class="fa-solid fa-trash-can"></i></a>
