@@ -1,5 +1,5 @@
 # Adlink.bio
-Projet fictif d'un CMS permettant de générer une landing page avec 5 sections éditable par l'utilisateur.
+Projet fictif d'un CMS permettant de générer une landing page sur Symfony.
 
 ## Le CMS comporte :
 - Un **espace administrateur** qui leur permette de gérer l’ensemble des comptes clients.
