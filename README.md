@@ -61,3 +61,28 @@ L'utilisateur pourra aussi définir si la section sera **visible** ou non.
       ```
 
 ---
+## Aperçu du projet
+
+### Page d'accueil
+
+<img src="public/img/home.png" alt="Page d'accueil" width="40%"/>
+
+### Page de la landing page
+
+<img src="public/img/landing-page.png" alt="Page de la landing page" width="40%"/>
+
+### Page de connexion
+
+<img src="public/img/login.png" alt="Page de connexion" width="40%"/>
+
+### Page d'inscription
+
+<img src="public/img/register.png" alt="Page d'inscription" width="40%"/>
+
+### Page du dashboard
+
+<img src="public/img/dashboard.png" alt="Page du dashboard" width="40%"/>
+
+### Page d'administration
+
+<img src="public/img/admin.png" alt="Page d'administration" width="40%"/>
